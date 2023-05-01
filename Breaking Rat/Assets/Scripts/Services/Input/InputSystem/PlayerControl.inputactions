@@ -1,0 +1,67 @@
+{
+    "name": "PlayerControl",
+    "maps": [
+        {
+            "name": "ScreenInput",
+            "id": "80d92583-6c21-49fe-a92e-29d2ea44db1d",
+            "actions": [
+                {
+                    "name": "Turn",
+                    "type": "Value",
+                    "id": "0ece4673-c228-48fe-bf9d-505164e30084",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "Tap(duration=0.02)",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "2c9ff678-4c6a-4de5-a9b8-6b0849f02a86",
+                    "path": "<Touchscreen>/primaryTouch/startPosition",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "e6b071e1-006f-4c17-818c-f37e9406a90f",
+                    "path": "2DVector(mode=1)",
+                    "interactions": "",
+                    "processors": "ScaleVector2(x=1000)",
+                    "groups": "",
+                    "action": "Turn",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "Left",
+                    "id": "7f021d41-4c8f-4d41-9883-c4e8a7adf165",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "Right",
+                    "id": "6d3ed33b-98d3-422b-840c-a653a65725e2",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Turn",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

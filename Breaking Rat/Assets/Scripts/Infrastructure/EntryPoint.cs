@@ -1,20 +1,23 @@
-using BreakingRat.CompositionRoot;
 using UnityEngine;
+using Zenject;
 
 namespace BreakingRat.Infrastructure
 {
     public class EntryPoint : MonoBehaviour
     {
-        private InfrastructureDependencies _dependencies;
         private Game _game;
+
+        [Inject]
+        private void Construct(Game game)
+        {
+            _game = game;
+        }
 
         private void Awake()
         {
             DontDestroyOnLoad(this);
-
-            _dependencies = new();
-
-            _game = new(_dependencies.Machine);
         }
+
+
     }
 }

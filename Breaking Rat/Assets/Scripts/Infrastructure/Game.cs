@@ -10,10 +10,7 @@ namespace BreakingRat.Infrastructure
 
         public Game(GameStateMachine gameStateMachine)
         {
-
             GameStateMachine = gameStateMachine;
-
-            GameStateMachine.EnterState<InitializeState>();
         }
     }
 }

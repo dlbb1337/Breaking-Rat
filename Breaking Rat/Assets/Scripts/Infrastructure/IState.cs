@@ -2,10 +2,8 @@ using System;
 
 namespace BreakingRat.Infrastructure
 {
-    public interface IState
+    public interface IState:IExitableState
     {
-        void OnEnter();
-        void OnStay();
-        void OnExit();
+        void Enter();
     }
 }
