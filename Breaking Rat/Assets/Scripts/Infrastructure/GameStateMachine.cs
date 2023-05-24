@@ -1,10 +1,10 @@
-using System.Collections.Generic;
+using BreakingRat.Infrastructure.States;
 using System;
-using UnityEngine;
+using System.Collections.Generic;
 
 namespace BreakingRat.Infrastructure
 {
-    public class GameStateMachine 
+    public class GameStateMachine
     {
         private readonly Dictionary<Type, IExitableState> _states;
         private IExitableState _activeState;
@@ -21,7 +21,7 @@ namespace BreakingRat.Infrastructure
             _states = dictionaryStates;
         }
 
-        public void EnterState<TState>() where TState : class,IState
+        public void EnterState<TState>() where TState : class, IState
         {
             _activeState?.Exit();
             var state = GetState<TState>();
@@ -29,7 +29,7 @@ namespace BreakingRat.Infrastructure
             state.Enter();
         }
 
-        public void EnterState<TState, TPay>(TPay pay) where TState : class, IPayLoadedState<TPay>
+        public void EnterState<TState, TPay>(TPay pay) where TState : class, IValueState<TPay>
         {
             _activeState?.Exit();
             var state = GetState<TState>();
@@ -37,13 +37,13 @@ namespace BreakingRat.Infrastructure
             state.Enter(pay);
         }
 
-        public void ExitState<TState>() where TState : class,IState
+        public void ExitState<TState>() where TState : class, IState
         {
             var state = GetState<TState>();
             state.Exit();
         }
 
-        private TState GetState<TState>() where TState : class,IExitableState => 
+        private TState GetState<TState>() where TState : class, IExitableState =>
             _states[typeof(TState)] as TState;
     }
 }

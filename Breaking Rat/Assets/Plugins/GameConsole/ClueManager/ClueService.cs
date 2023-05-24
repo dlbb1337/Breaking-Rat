@@ -1,11 +1,11 @@
+using GameConsole.CommandTools;
+using GameConsole.ConsoleManager;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
-using GameConsole.ConsoleManager;
-using GameConsole.CommandTools;
 
 namespace GameConsole.ClueManager
 {
@@ -19,60 +19,36 @@ namespace GameConsole.ClueManager
         private List<string> _commandNames;
         private List<string> _similarCommands;
         private Dictionary<string, GameObject> _clues = new();
+        private bool DisplayEnabled => _display.activeSelf == true;
 
         [Inject]
         private void Construct(ConsoleInput consoleInput, CommandService commandService)
         {
             _consoleInput = consoleInput;
             _commandService = commandService;
-
             _consoleInput.TextChanged += OnInputTextChanged;
 
-            _commandNames = _commandService.CommandsByName.Select(command => command.Key).ToList();
+            Init();
+        }
 
-            for (int i = 0; i < _commandNames.Count; i++)
-            {
-                var parameters = _commandService.CommandsByName[_commandNames[i]].GetParameters();
+        private void Init()
+        {
+            _commandNames = HandleCommandNames(GetNamesFromCommandService());
 
-                var parametersInString =
-                    string.Join("; ", parameters.Select(parameter => parameter.ParameterType.Name));
+            CreateClues(_commandNames);
 
-
-                _commandNames[i] = _commandNames[i] + " (" + parametersInString + ")";
-            }
-
-            foreach (var commandName in _commandNames)
-            {
-                var clue = CreateClue();
-                clue.SetActive(false);
-
-                var tmp_text = clue.GetComponentInChildren<TMP_Text>();
-
-                var button = clue.GetComponent<Button>();
-
-                tmp_text.text = commandName;
-
-                button.onClick.AddListener(() => _consoleInput.Text = commandName.Replace("(", "").Replace(")", ""));
-
-                if (_clues.ContainsKey(commandName) == false)
-                    _clues[commandName] = clue;
-            }
-
-            if (_display.activeSelf == true)
+            if (DisplayEnabled)
                 _display.SetActive(false);
+
         }
 
         private void OnInputTextChanged(string text)
         {
-            foreach (var clue in _clues)
-            {
-                if (clue.Value.activeSelf == true)
-                    clue.Value.SetActive(false);
-            }
+            DisableAllClues();
 
             if (text == string.Empty)
             {
-                if (_display.activeSelf == true)
+                if (DisplayEnabled)
                     _display.SetActive(false);
 
                 _similarCommands = null;
@@ -83,25 +59,89 @@ namespace GameConsole.ClueManager
                     (text[text.Length - 1], text.Length - 1, _similarCommands is null ? _commandNames : _similarCommands);
 
                 if (_similarCommands.Count == 0)
-                {
                     return;
-                }
 
-                if (_display.activeSelf == false)
+                if (DisplayEnabled == false)
                     _display.SetActive(true);
 
-                foreach (var command in _similarCommands)
+                EnableClues(_similarCommands);
+            }
+        }
+
+        public void UpdateCommands()
+        {
+            Init();
+        }
+
+        private void CreateClues(List<string> commandNames)
+        {
+            foreach (var commandName in commandNames)
+            {
+                if (_clues.ContainsKey(commandName) == false)
                 {
-                    _clues[command].SetActive(true);
+                    var clue = CreateClue();
+
+                    HandleClue(commandName, clue);
                 }
             }
         }
 
-        private List<string> FindSimilarCommands(char letter, int index, List<string> strings)
+        private GameObject HandleClue(string commandName, GameObject clue)
         {
-            return strings.Where(str => str[index] == letter).ToList();
+            clue.SetActive(false);
+
+            var tmp_text = clue.GetComponentInChildren<TMP_Text>();
+
+            var button = clue.GetComponent<Button>();
+
+            tmp_text.text = commandName;
+
+            button.onClick.AddListener(() => _consoleInput.Text = commandName.Replace("(", "").Replace(")", ""));
+
+            _clues[commandName] = clue;
+
+            return clue;
         }
 
-        private GameObject CreateClue() => Instantiate(_cluePrefab, _parent);
+        private List<string> HandleCommandNames(List<string> commandNames)
+        {
+            for (int i = 0; i < commandNames.Count; i++)
+            {
+                var parameters = _commandService.CommandsByName[commandNames[i]].GetParameters();
+
+                var parametersInString =
+                    string.Join("; ", parameters.Select(parameter => parameter.ParameterType.Name));
+
+
+                commandNames[i] = commandNames[i] + " (" + parametersInString + ")";
+            }
+            return commandNames;
+        }
+
+        private List<string> GetNamesFromCommandService() =>
+            _commandService.CommandsByName.Select(command => command.Key).ToList();
+
+        private void EnableClues(List<string> keys)
+        {
+            foreach (var key in keys)
+            {
+                _clues[key].SetActive(true);
+            }
+        }
+
+        private void DisableAllClues()
+        {
+            foreach (var clue in _clues)
+            {
+                if (clue.Value.activeSelf == true)
+                    clue.Value.SetActive(false);
+            }
+        }
+
+        private List<string> FindSimilarCommands(char letter, int index, List<string> strings) =>
+            strings.Where(str => str[index] == letter).ToList();
+
+        private GameObject CreateClue() =>
+            Instantiate(_cluePrefab, _parent);
     }
 }

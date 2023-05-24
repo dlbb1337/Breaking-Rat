@@ -1,5 +1,9 @@
-using BreakingRat.Services.AssetManagement;
+using BreakingRat.Data.Services;
+using BreakingRat.GameLogic.Obstacles;
+using BreakingRat.GameLogic.Services;
+using BreakingRat.Infrastructure.Factory;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace BreakingRat.GameLogic.Location.MazeLogic
@@ -8,129 +12,87 @@ namespace BreakingRat.GameLogic.Location.MazeLogic
     {
         private readonly float _distanceBetweenCells = 1;
         private readonly MazeGenerator _mazeGenerator;
-        private readonly IAssetProvider _assetProvider;
-        private readonly  List<Maze> _mazes = new();
-        private int _score = 0;
+        private readonly IFactory _factory;
+        private readonly List<IObstacles> _obstacles = new();
+        private readonly List<Maze> _mazes = new();
+        private readonly IStaticDataService _staticDataService;
+        private IScoreService _scoreService;
 
-        public MazeGenerator MazeGenerator => _mazeGenerator;
+        public int LevelId { get; set; }
         public int Capacity { get; set; } = 10;
-        public int Score => _score;
         public List<Maze> Mazes => _mazes;
 
-        public MazeSpawner(MazeGenerator mazeGenerator, IAssetProvider assetProvider)
+        public MazeSpawner
+            (MazeGenerator mazeGenerator,
+            IFactory factory,
+            List<IObstacles> obstacles,
+            IStaticDataService staticDataService,
+            IScoreService scoreService)
         {
             _mazeGenerator = mazeGenerator;
-            _assetProvider = assetProvider;
+            _factory = factory;
+            _obstacles = obstacles;
+            _staticDataService = staticDataService;
+            _scoreService = scoreService;
         }
 
         public Maze SpawnMaze(int width, int height, Vector3 mazePosition, TemplateCell? entry = null)
         {
-            if (_mazes.Count > Capacity)
+            var maze = _factory.InstantiateMaze(width, height, mazePosition, _distanceBetweenCells, entry);
+
+            AddObstacles(maze);
+
+            return HandleMaze(maze);
+        }
+
+        private void AddObstacles(Maze maze)
+        {
+            foreach (var obstacles in _obstacles)
             {
-                Remove(_mazes[0].gameObject);
-                _mazes.RemoveAt(0);
+                var level = _staticDataService.CurrentLevelStaticData;
+                var obstacle = level.ObStacles.Where(x => x.ObstacleId == obstacles.ObstacleId).FirstOrDefault();
+
+                if (obstacle is null == false)
+                    obstacles.Add(maze, obstacle);
             }
+        }
 
-            var templateMaze = _mazeGenerator.Generate(width, height, entry);
+        public Maze SpawnMaze(TemplateMaze templateMaze, Vector3 mazePosition, TemplateCell? entry = null)
+        {
+            var maze = _factory.InstantiateMaze(templateMaze, mazePosition, _distanceBetweenCells, entry);
 
-            Maze maze = _assetProvider.Instantiate<Maze>(AssetPaths.MazePrefabPath, mazePosition, Quaternion.identity);
+            return HandleMaze(maze);
+        }
 
-            var cells = new Cell[width, height];
+        private Maze HandleMaze(Maze maze)
+        {
+            DestroyExcessMazes();
 
-            for (int x = 0; x < width; x++)
-            {
-                for (int y = 0; y < height; y++)
-                {
-                    cells[x, y] = SpawnCell(templateMaze[x, y], maze.transform);
-                }
-            }
-
-            var bounds = SpawnBounds(templateMaze, maze);
-
-            maze.Construct(templateMaze, cells, bounds);
-
-            maze.ExitTrigger.Enter.AddListener
-                ( collider => 
-                {
-                    _score++;
-                    GameObject.Destroy(maze.ExitTrigger);
-                });
-
-            maze.ExitTrigger.transform.position += Vector3.up * height * _distanceBetweenCells;
+            SetExitTrigger(maze);
 
             _mazes.Add(maze);
 
             return maze;
         }
 
-        public Maze SpawnMaze(int width, int height, Vector3 mazePosition,TemplateMaze templateMaze, TemplateCell? entry = null)
+        private void SetExitTrigger(Maze maze)
+        {
+            maze.ExitTrigger.Enter.AddListener
+                            (collider =>
+                            {
+                                _scoreService++;
+                                _factory.Remove(maze.ExitTrigger.gameObject);
+                            });
+        }
+
+        private void DestroyExcessMazes()
         {
             if (_mazes.Count > Capacity)
             {
-                Remove(_mazes[0].gameObject);
+                _factory.Remove(_mazes[0].gameObject);
                 _mazes.RemoveAt(0);
             }
-
-            Maze maze = _assetProvider.Instantiate<Maze>(AssetPaths.MazePrefabPath, mazePosition, Quaternion.identity);
-
-            var cells = new Cell[width, height];
-
-            for (int x = 0; x < width; x++)
-            {
-                for (int y = 0; y < height; y++)
-                {
-                    cells[x, y] = SpawnCell(templateMaze[x, y], maze.transform);
-                }
-            }
-
-            var bounds = SpawnBounds(templateMaze, maze);
-
-            maze.Construct(templateMaze, cells, bounds);
-
-            maze.ExitTrigger.Enter.AddListener
-                (collider =>
-                {
-                    _score++;
-                    GameObject.Destroy(maze.ExitTrigger);
-                });
-
-            maze.ExitTrigger.transform.position += Vector3.up * height * _distanceBetweenCells;
-
-            _mazes.Add(maze);
-
-            return maze;
         }
 
-        private Cell SpawnCell(TemplateCell templateCell, Transform parent)
-        {
-            float positionX = templateCell.X * _distanceBetweenCells + parent.position.x;
-            float positionY = templateCell.Y * _distanceBetweenCells + parent.position.y;
-            float positionZ = 0 + parent.position.z;
-
-            var position = new Vector3(positionX, positionY, positionZ);
-
-            Cell cell = _assetProvider.Instantiate<Cell>(AssetPaths.CellPrefabPath, position, Quaternion.identity, parent);
-
-
-            if (templateCell.LeftWall == false)
-                Remove(cell.LeftWall);
-
-            if (templateCell.BottomWall == false)
-                Remove(cell.BottomWall);
-
-            return cell;
-        }
-
-        private Cell[] SpawnBounds(TemplateMaze templateMaze, Maze maze)
-        {
-            var bounds = new List<Cell>();
-
-            foreach (var templateCell in templateMaze.Bounds)
-                bounds.Add(SpawnCell(templateCell, maze.transform));
-
-            return bounds.ToArray();
-        }
-
-        private void Remove(GameObject obj) => GameObject.Destroy(obj);
     }
 }

@@ -25,9 +25,7 @@ namespace BreakingRat.Infrastructure
         private IEnumerator Wait(AsyncOperation operation, Action onLoaded)
         {
             while (operation.isDone == false)
-            {
                 yield return null;
-            }
 
             onLoaded?.Invoke();
         }

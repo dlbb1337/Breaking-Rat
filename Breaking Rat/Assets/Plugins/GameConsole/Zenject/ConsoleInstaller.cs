@@ -4,11 +4,13 @@ using GameConsole.LogManager;
 using GameConsole.ConsoleManager;
 using GameConsole.CommandTools;
 using GameConsole.CommandTools.Commands;
+using GameConsole.ClueManager;
 
 public class ConsoleInstaller : MonoInstaller
 {
     [SerializeField] private ConsoleInput _consoleInput;
     [SerializeField] private ConsoleOutput _consoleOutput;
+    [SerializeField] private ClueService _clueService;
 
     public override void InstallBindings()
     {
@@ -19,5 +21,7 @@ public class ConsoleInstaller : MonoInstaller
         Container.Bind<ICommandContainer>().To<SimpleCommandContainer>().AsSingle();
         Container.Bind<CommandService>().FromNew().AsSingle();
         Container.Bind<MethodParser>().FromInstance(new MethodParser()).AsSingle();
+        Container.Bind<ClueService>().FromInstance(_clueService).AsSingle();
+        Container.Bind<ConsoleService>().FromInstance(this.GetComponent<ConsoleService>()).AsSingle();
     }
 }

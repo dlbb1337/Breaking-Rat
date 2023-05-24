@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a4de9a72dc2166419c3d1b45cafbac2, type: 3}
+  m_Name: Level3
+  m_EditorClassIdentifier: 
+  _levelId: 3
+  _deadzoneStaticData: {fileID: 11400000, guid: 2611b9cb15f6494439c7c43b9728e7da, type: 2}
+  _playerStaticData: {fileID: 11400000, guid: 3fcda8f8640a3f641af515a5bbfb34a1, type: 2}
+  _mazesStaticData: {fileID: 11400000, guid: 584af10d0c490e64c84044bf79ccdb19, type: 2}
+  _obstacles: []

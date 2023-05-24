@@ -1,8 +1,10 @@
+using GameConsole.ClueManager;
+using GameConsole.CommandTools;
+using GameConsole.LogManager;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
-using GameConsole.LogManager;
 using ILogHandler = GameConsole.LogManager.ILogHandler;
-using GameConsole.CommandTools;
 
 namespace GameConsole.ConsoleManager
 {
@@ -16,6 +18,7 @@ namespace GameConsole.ConsoleManager
         private CommandService _commandService;
         private ConsoleInput _consoleInput;
         private ConsoleOutput _consoleOutput;
+        private ClueService _clueService;
 
         [Inject]
         private void Construct
@@ -24,7 +27,8 @@ namespace GameConsole.ConsoleManager
             MethodParser methodParser,
             CommandService commandService,
             ConsoleInput consoleInput,
-            ConsoleOutput consoleOutput)
+            ConsoleOutput consoleOutput,
+            ClueService clueService)
         {
             _logHandler = logHandler;
             _logReceiver = logReceiver;
@@ -32,17 +36,16 @@ namespace GameConsole.ConsoleManager
             _commandService = commandService;
             _consoleInput = consoleInput;
             _consoleOutput = consoleOutput;
-        }
-
-        private void Awake()
-        {
-            DontDestroyOnLoad(this);
+            _clueService = clueService;
         }
 
         private void OnEnable()
         {
             _logReceiver.MessageReceived += OnLogReceived;
             _consoleInput.Submit += OnInputSubmit;
+
+            if (_consoleDisplay.activeSelf)
+                _consoleDisplay.SetActive(false);
         }
 
         private void OnDisable()
@@ -54,9 +57,7 @@ namespace GameConsole.ConsoleManager
         private void Update()
         {
             if (Input.GetKeyDown(_toggleKey))
-            {
                 _consoleDisplay.SetActive(_consoleDisplay.activeSelf ? false : true);
-            }
         }
 
         private void OnInputSubmit(string text)
@@ -65,9 +66,7 @@ namespace GameConsole.ConsoleManager
             var methodInfo = _commandService.FindMethodByName(method[0]);
 
             if (methodInfo is null)
-            {
                 return;
-            }
 
             var parameters = _methodParser.ParseParameters(methodInfo, text.Substring(method[0].Length));
             _commandService.RunCommand(methodInfo, parameters);
@@ -78,6 +77,12 @@ namespace GameConsole.ConsoleManager
             var processedLog = _logHandler.HandleLog(receivedLog);
 
             _consoleOutput.DisplayLog(processedLog);
+        }
+
+        public void AddCommands(List<ICommandContainer> commands)
+        {
+            _commandService.AddCommands(commands);
+            _clueService.UpdateCommands();
         }
     }
 }
