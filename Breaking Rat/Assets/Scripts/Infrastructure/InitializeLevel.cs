@@ -6,6 +6,7 @@ using BreakingRat.GameLogic.DeathLogic.Services;
 using BreakingRat.GameLogic.Location.MazeLogic;
 using BreakingRat.GameLogic.PlayerLogic;
 using BreakingRat.Infrastructure;
+using BreakingRat.Infrastructure.Services.Ads;
 using BreakingRat.Infrastructure.States;
 using BreakingRat.UI;
 using GameConsole.CommandTools;
@@ -25,6 +26,7 @@ namespace BreakingRat.GameLogic
         private readonly IStaticDataService _staticDataService;
         private readonly IFactory _factory;
         private readonly IDeathService _deathService;
+        private readonly IAdsService _adsService;
 
         public InitializeLevel
             (GameStateMachine gameStateMachine,
@@ -34,7 +36,8 @@ namespace BreakingRat.GameLogic
             List<ICommandContainer> containers,
             IStaticDataService staticDataService,
             IFactory factory,
-            IDeathService deathService)
+            IDeathService deathService,
+            IAdsService adsService)
         {
             _gameStateMachine = gameStateMachine;
             _mazeSpawner = mazeSpawner;
@@ -44,6 +47,7 @@ namespace BreakingRat.GameLogic
             _staticDataService = staticDataService;
             _factory = factory;
             _deathService = deathService;
+            _adsService = adsService;
 
             Init();
         }

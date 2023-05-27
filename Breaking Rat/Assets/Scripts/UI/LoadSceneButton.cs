@@ -1,4 +1,3 @@
-using BreakingRat.Data.Services;
 using BreakingRat.Infrastructure;
 using BreakingRat.Infrastructure.States;
 using UnityEngine;
@@ -7,18 +6,18 @@ using Zenject;
 
 namespace BreakingRat.UI
 {
-    public class PlayButton : MonoBehaviour
+    public class LoadSceneButton : MonoBehaviour
     {
         [SerializeField] private Button _button;
+        [SerializeField] private string _sceneName;
         private GameStateMachine _gameStateMachine;
-        private IStaticDataService _staticDataService;
 
         [Inject]
         private void Construct(GameStateMachine gameStateMachine)
         {
             _gameStateMachine = gameStateMachine;
 
-            _button.onClick.AddListener(() => _gameStateMachine.EnterState<LoadSceneState, string>("SampleScene"));
+            _button.onClick.AddListener(() => _gameStateMachine.EnterState<LoadSceneState, string>(_sceneName));
         }
     }
 }

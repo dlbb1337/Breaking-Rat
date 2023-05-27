@@ -4,6 +4,7 @@ using BreakingRat.GameLogic.DeathLogic.Services;
 using BreakingRat.GameLogic.Location.MazeLogic;
 using BreakingRat.GameLogic.Obstacles;
 using BreakingRat.GameLogic.Services;
+using BreakingRat.Infrastructure.Services.Ads;
 using BreakingRat.Infrastructure.Services.AssetManagement;
 using BreakingRat.Infrastructure.Services.Input;
 using BreakingRat.Infrastructure.Services.Input.InputSystem;
@@ -25,6 +26,8 @@ namespace BreakingRat.CompositionRoot
             Container.Bind<IPauseService>().To<PauseService>().AsSingle();
 
             Container.Bind<IScoreService>().To<ScoreService>().AsSingle();
+
+            Container.Bind<IAdsService>().To<AdsService>().AsSingle();
 
             Container.Bind<IRecordService>().To<RecordService>().AsSingle();
 
