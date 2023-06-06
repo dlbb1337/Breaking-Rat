@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 708c801999701be498a50c7ca3e9faa8, type: 3}
+  m_Name: PlayerStaticData
+  m_EditorClassIdentifier: 
+  _instantiatePlayerPosition: {x: 0, y: 0, z: 0}
+  _playerMovementSpeed: 6
+  _turnPercentage: 40
+  _cameraOffset: {x: 0, y: 4, z: -10}
+  _cameraSize: 9
+  _cameraDefaultPosition: {x: 0, y: 0, z: 0}
+  _interpolatePercentage: 2
+  _y: 1
+  _x: 0
+  _z: 0
