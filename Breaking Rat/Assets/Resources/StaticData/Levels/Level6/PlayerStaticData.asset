@@ -16,9 +16,9 @@ MonoBehaviour:
   _playerMovementSpeed: 6
   _turnPercentage: 35
   _cameraOffset: {x: 0, y: 4, z: -10}
-  _cameraSize: 11
+  _cameraSize: 12.5
   _cameraDefaultPosition: {x: 0, y: 0, z: 0}
-  _interpolatePercentage: 1
+  _interpolatePercentage: 2
   _y: 1
   _x: 0
   _z: 0

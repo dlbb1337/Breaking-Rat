@@ -9,9 +9,6 @@ using BreakingRat.Infrastructure;
 using BreakingRat.Infrastructure.Services.Ads;
 using BreakingRat.Infrastructure.States;
 using BreakingRat.UI;
-using GameConsole.CommandTools;
-using GameConsole.ConsoleManager;
-using System.Collections.Generic;
 using UnityEngine;
 using IFactory = BreakingRat.Infrastructure.Factory.IFactory;
 
@@ -22,7 +19,6 @@ namespace BreakingRat.GameLogic
         private readonly GameStateMachine _gameStateMachine;
         private readonly MazeSpawner _mazeSpawner;
         private readonly MazeGenerator _mazeGenerator;
-        private readonly ConsoleService _consoleService;
         private readonly IStaticDataService _staticDataService;
         private readonly IFactory _factory;
         private readonly IDeathService _deathService;
@@ -32,8 +28,6 @@ namespace BreakingRat.GameLogic
             (GameStateMachine gameStateMachine,
             MazeSpawner mazeSpawner,
             MazeGenerator mazeGenerator,
-            ConsoleService consoleService,
-            List<ICommandContainer> containers,
             IStaticDataService staticDataService,
             IFactory factory,
             IDeathService deathService,
@@ -42,8 +36,6 @@ namespace BreakingRat.GameLogic
             _gameStateMachine = gameStateMachine;
             _mazeSpawner = mazeSpawner;
             _mazeGenerator = mazeGenerator;
-            _consoleService = consoleService;
-            _consoleService.AddCommands(containers);
             _staticDataService = staticDataService;
             _factory = factory;
             _deathService = deathService;
@@ -80,7 +72,7 @@ namespace BreakingRat.GameLogic
 
         private PlayerMovement Player(PlayerStaticData data)
         {
-            var player = _factory.CreatePlayer(data.InstantiatePlayerPosition,Quaternion.identity);
+            var player = _factory.CreatePlayer(data.InstantiatePlayerPosition, Quaternion.identity);
 
             player.MovementSpeed = data.PlayerMovementSpeed;
             player.TurnPercentage = data.TurnPercentage;
@@ -102,7 +94,7 @@ namespace BreakingRat.GameLogic
         private void MazeSpawner(MazesStaticData data)
         {
             _mazeSpawner.LevelId = _staticDataService.LevelId;
-            _mazeSpawner.Capacity = 10;
+            _mazeSpawner.Capacity = 20;
             _mazeSpawner.SpawnMaze(data.Width, data.Height, data.InstantiateFirstMazePosition);
 
             SpawnMazes(data);
@@ -122,29 +114,24 @@ namespace BreakingRat.GameLogic
         private void SpawnMazes(MazesStaticData data)
         {
             InstantiatingMazes(data);
-            InstantiateLastMaze(data);
         }
 
         private void InstantiateLastMaze(MazesStaticData data)
         {
-            var upperMaze = _mazeSpawner.Mazes[_mazeSpawner.Mazes.Count - 1];
+            var upperMaze = _mazeSpawner.Mazes[_mazeSpawner.Mazes.Count -3];
 
-            var position = upperMaze.transform.position + Vector3.up * data.Height;
-
-            var templateMaze =
-                _mazeGenerator.GenerateEmptyMaze(data.Width, data.Height, upperMaze.TemplateMaze.exit);
-
-            _mazeSpawner.SpawnMaze(templateMaze, position);
+            upperMaze.ExitTrigger.Enter.AddListener(collider => InstantiatingMazes(data));
         }
 
         private void InstantiatingMazes(MazesStaticData data)
         {
-            for (int i = 0; i < 9; i++)
+            for (int i = 0; i < 15; i++)
             {
                 var lastMaze = _mazeSpawner.Mazes[_mazeSpawner.Mazes.Count - 1];
                 _mazeSpawner.SpawnMaze
                     (data.Width, data.Height, lastMaze.transform.position + Vector3.up * data.Height, lastMaze.TemplateMaze.exit);
             }
+            InstantiateLastMaze(data);
         }
     }
 }

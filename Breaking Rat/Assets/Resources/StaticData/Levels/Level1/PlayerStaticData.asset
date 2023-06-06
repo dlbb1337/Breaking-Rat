@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 708c801999701be498a50c7ca3e9faa8, type: 3}
   m_Name: PlayerStaticData
   m_EditorClassIdentifier: 
-  _instantiatePlayerPosition: {x: 4, y: 0.5, z: 0}
+  _instantiatePlayerPosition: {x: 0, y: 0.5, z: 0}
   _playerMovementSpeed: 4
   _turnPercentage: 25
   _cameraOffset: {x: 0, y: 4, z: -10}
-  _cameraSize: 8
-  _cameraDefaultPosition: {x: 4, y: 0, z: 0}
-  _interpolatePercentage: 0.5
+  _cameraSize: 9.2
+  _cameraDefaultPosition: {x: 0, y: 0, z: 0}
+  _interpolatePercentage: 2
   _y: 1
   _x: 0
   _z: 0
