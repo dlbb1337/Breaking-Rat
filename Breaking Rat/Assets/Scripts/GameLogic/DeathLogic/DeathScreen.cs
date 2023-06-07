@@ -22,7 +22,7 @@ namespace BreakingRat.GameLogic.DeathLogic
 
             _scoreAndRecordText.text = $"Score: {scoreService.Score} \nRecord: {recordService.Record}";
 
-            _playAgainButton.onClick.AddListener(() => _gameStateMachine.EnterState<LoadSceneState, string>("SampleScene"));
+            _playAgainButton.onClick.AddListener(() => _gameStateMachine.EnterState<LoadSceneState, string>("Level"));
             _menuButton.onClick.AddListener(() => _gameStateMachine.EnterState<LoadSceneState, string>("Menu"));
         }
     }

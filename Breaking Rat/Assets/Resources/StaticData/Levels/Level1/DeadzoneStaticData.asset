@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _instantiateDeadzonePosition: {x: 6, y: -10, z: 0}
   _movementSpeed: 0.45
-  _speedMultiplier: 0.05
+  _speedMultiplier: 0.07
