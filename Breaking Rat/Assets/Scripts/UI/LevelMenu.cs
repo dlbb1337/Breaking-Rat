@@ -1,5 +1,7 @@
 using BreakingRat.Data;
 using BreakingRat.Data.Services;
+using BreakingRat.Infrastructure;
+using BreakingRat.Infrastructure.States;
 using BreakingRat.UI.Factory;
 using System.Collections.Generic;
 using TMPro;
@@ -18,13 +20,19 @@ namespace BreakingRat.UI
         private IStaticDataService _staticDataService;
         private IUIFactory _factory;
         private IProgressService _progressService;
+        private GameStateMachine _stateMachine;
 
         [Inject]
-        private void Construct(IStaticDataService staticDataService, IUIFactory UIFactory, IProgressService progressService)
+        private void Construct(
+            IStaticDataService staticDataService,
+            IUIFactory UIFactory,
+            IProgressService progressService,
+            GameStateMachine stateMachine)
         {
             _staticDataService = staticDataService;
             _factory = UIFactory;
             _progressService = progressService;
+            _stateMachine = stateMachine;
 
             LoadLevels();
         }
@@ -39,6 +47,8 @@ namespace BreakingRat.UI
             DisableLevelsDisplay();
 
             UpdateLevelText(_staticDataService.CurrentLevelStaticData);
+
+            _stateMachine.EnterState<GameLoopState>();
         }
 
         public void EnableLevelsDisplay() =>
