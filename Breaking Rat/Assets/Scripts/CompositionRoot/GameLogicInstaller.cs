@@ -1,4 +1,3 @@
-using BreakingRat.Commands;
 using BreakingRat.GameLogic;
 using BreakingRat.GameLogic.DeathLogic.Services;
 using BreakingRat.GameLogic.Location.MazeLogic;
@@ -9,7 +8,6 @@ using BreakingRat.Infrastructure.Services.AssetManagement;
 using BreakingRat.Infrastructure.Services.Input;
 using BreakingRat.Infrastructure.Services.Input.InputSystem;
 using BreakingRat.UI.Factory;
-using GameConsole.CommandTools;
 using UnityEngine;
 using Zenject;
 using Factory = BreakingRat.Infrastructure.Factory.Factory;
@@ -52,10 +50,6 @@ namespace BreakingRat.CompositionRoot
             Container.Bind<InputService>().FromInstance(_inputService).AsSingle();
 
             Container.Bind<ITouchService>().To<TouchService>().AsSingle();
-
-            Container.Bind<ICommandContainer>().To<UIFactoryCommandContainer>().AsSingle();
-
-            Container.Bind<ICommandContainer>().To<ProgressCommands>().AsSingle();
 
             Container.Bind<InitializeLevel>().FromNew().AsSingle().NonLazy();
         }

@@ -20,7 +20,7 @@ namespace BreakingRat.Infrastructure.Services.Ads
         private bool _initialized = false;
         private string _gameID;
         private string _adID;
-        private bool _testMode = true;
+        private bool _testMode = false;
 
         public AdsService()
         {
