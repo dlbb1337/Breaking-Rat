@@ -9,6 +9,7 @@ using BreakingRat.Infrastructure;
 using BreakingRat.Infrastructure.Services.Ads;
 using BreakingRat.Infrastructure.States;
 using BreakingRat.UI;
+using System.Threading.Tasks;
 using UnityEngine;
 using IFactory = BreakingRat.Infrastructure.Factory.IFactory;
 
@@ -41,38 +42,40 @@ namespace BreakingRat.GameLogic
             _deathService = deathService;
             _adsService = adsService;
 
-            Init();
+            InitAsync();
         }
 
 
-        private void Init()
+        private async Task InitAsync()
         {
             _gameStateMachine.EnterState<InitializeState>();
 
             var lvl = _staticDataService.CurrentLevelStaticData;
 
-            var player = Player(lvl.PlayerStaticData);
+            var player = await PlayerAsync(lvl.PlayerStaticData);
 
-            var deadzone = Deadzone(lvl.DeadzoneStaticData);
+            var deadzone = await DeadzoneAsync(lvl.DeadzoneStaticData);
 
-            CreateHUD(player, deadzone);
+            await CreateHUD(player, deadzone);
 
-            MazeSpawner(lvl.MazesStaticData);
+            await MazeSpawnerAsync(lvl.MazesStaticData);
 
             _gameStateMachine.EnterState<GameLoopState>();
         }
 
-        private void CreateHUD(PlayerMovement player, Deadzone deadzone)
+        private async Task CreateHUD(PlayerMovement player, Deadzone deadzone)
         {
-            var HUD = _factory.CreateHUD();
+            var HUD = await _factory.CreateHUD();
 
             HUD.Player = player.transform;
             HUD.Deadzone = deadzone.transform;
         }
 
-        private PlayerMovement Player(PlayerStaticData data)
+        private async Task<PlayerMovement> PlayerAsync(PlayerStaticData data)
         {
-            var player = _factory.CreatePlayer(data.InstantiatePlayerPosition, Quaternion.identity);
+            var player = await _factory.CreatePlayer
+                (position: data.InstantiatePlayerPosition,
+                 rotation: Quaternion.identity);
 
             player.MovementSpeed = data.PlayerMovementSpeed;
             player.TurnPercentage = data.TurnPercentage;
@@ -91,18 +94,18 @@ namespace BreakingRat.GameLogic
             return player;
         }
 
-        private void MazeSpawner(MazesStaticData data)
+        private async Task MazeSpawnerAsync(MazesStaticData data)
         {
             _mazeSpawner.LevelId = _staticDataService.LevelId;
             _mazeSpawner.Capacity = 20;
-            _mazeSpawner.SpawnMaze(data.Width, data.Height, data.InstantiateFirstMazePosition);
+            await _mazeSpawner.SpawnMazeAsync(data.Width, data.Height, data.InstantiateFirstMazePosition);
 
-            SpawnMazes(data);
+            await SpawnMazesAsync(data);
         }
 
-        private Deadzone Deadzone(DeadzoneStaticData data)
+        private async Task<Deadzone> DeadzoneAsync(DeadzoneStaticData data)
         {
-            var deadzone = _factory.CreateDeadzone(data.InstantiateDeadzonePosition, Quaternion.identity);
+            var deadzone = await _factory.CreateDeadzone(data.InstantiateDeadzonePosition, Quaternion.identity);
 
             deadzone.MovementSpeed = data.MovementSpeed;
             deadzone.SpeedMultiplier = data.SpeedMultiplier;
@@ -111,24 +114,24 @@ namespace BreakingRat.GameLogic
             return deadzone;
         }
 
-        private void SpawnMazes(MazesStaticData data)
+        private async Task SpawnMazesAsync(MazesStaticData data)
         {
-            InstantiatingMazes(data);
+            await InstantiatingMazesAsync(data);
         }
 
         private void InstantiateLastMaze(MazesStaticData data)
         {
             var upperMaze = _mazeSpawner.Mazes[_mazeSpawner.Mazes.Count -3];
 
-            upperMaze.ExitTrigger.Enter.AddListener(collider => InstantiatingMazes(data));
+            upperMaze.ExitTrigger.Enter.AddListener(async collider => await InstantiatingMazesAsync(data));
         }
 
-        private void InstantiatingMazes(MazesStaticData data)
+        private async Task InstantiatingMazesAsync(MazesStaticData data)
         {
             for (int i = 0; i < 15; i++)
             {
                 var lastMaze = _mazeSpawner.Mazes[_mazeSpawner.Mazes.Count - 1];
-                _mazeSpawner.SpawnMaze
+                await _mazeSpawner.SpawnMazeAsync
                     (data.Width, data.Height, lastMaze.transform.position + Vector3.up * data.Height, lastMaze.TemplateMaze.exit);
             }
             InstantiateLastMaze(data);

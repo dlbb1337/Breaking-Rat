@@ -4,6 +4,7 @@ using BreakingRat.GameLogic.Services;
 using BreakingRat.Infrastructure.Factory;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace BreakingRat.GameLogic.Location.MazeLogic
@@ -36,9 +37,14 @@ namespace BreakingRat.GameLogic.Location.MazeLogic
             _scoreService = scoreService;
         }
 
-        public Maze SpawnMaze(int width, int height, Vector3 mazePosition, TemplateCell? entry = null)
+        public async Task<Maze> SpawnMazeAsync(int width, int height, Vector3 mazePosition, TemplateCell? entry = null)
         {
-            var maze = _factory.InstantiateMaze(width, height, mazePosition, _distanceBetweenCells, entry);
+            var maze = await _factory.InstantiateMaze
+                (width,
+                 height,
+                 mazePosition,
+                 _distanceBetweenCells,
+                 entry);
 
             AddObstacles(maze);
 
@@ -53,13 +59,13 @@ namespace BreakingRat.GameLogic.Location.MazeLogic
                 var obstacle = level.ObStacles.Where(x => x.ObstacleId == obstacles.ObstacleId).FirstOrDefault();
 
                 if (obstacle is null == false)
-                    obstacles.Add(maze, obstacle);
+                    obstacles.AddAsync(maze, obstacle);
             }
         }
 
-        public Maze SpawnMaze(TemplateMaze templateMaze, Vector3 mazePosition, TemplateCell? entry = null)
+        public async Task<Maze> SpawnMazeAsync(TemplateMaze templateMaze, Vector3 mazePosition, TemplateCell? entry = null)
         {
-            var maze = _factory.InstantiateMaze(templateMaze, mazePosition, _distanceBetweenCells, entry);
+            var maze = await _factory.InstantiateMaze(templateMaze, mazePosition, _distanceBetweenCells, entry);
 
             return HandleMaze(maze);
         }

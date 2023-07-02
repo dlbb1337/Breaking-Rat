@@ -15,7 +15,7 @@ namespace BreakingRat.Infrastructure.Services.Input
         public TouchService(InputService inputService)
         {
             _inputService = inputService;
-
+            
             _inputService.onEnable += () =>
             {
                 _inputService.PlayerControl.ScreenInput.Turn.started += Turn_started;
@@ -29,6 +29,9 @@ namespace BreakingRat.Infrastructure.Services.Input
                 _inputService.PlayerControl.ScreenInput.Turn.performed -= Turn_performed;
                 _inputService.PlayerControl.ScreenInput.Turn.canceled -= Turn_canceled;
             };
+
+            _inputService.OnDisable();
+            _inputService.OnEnable();
         }
 
         private void Turn_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
