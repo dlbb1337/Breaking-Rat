@@ -16,7 +16,19 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: fd1fe1f8ed877bb47905ec9a8472051a
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 7483dd267b710514c8dcd9f8ff258bde
+    m_Address: Prefabs
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: e28363b98f9eace409235e4b4dddac62
+    m_Address: Spirtes
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 050248d490783b64e8d6bc88bcf53037
+    m_Address: StaticData
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 1eacb1a42c3e232449409320f7307a2d, type: 2}
   m_SchemaSet:
