@@ -39,7 +39,12 @@ namespace BreakingRat.GameLogic.Location.MazeLogic
 
         public async Task<Maze> SpawnMazeAsync(int width, int height, Vector3 mazePosition, TemplateCell? entry = null)
         {
-            var maze = await _factory.InstantiateMaze(width, height, mazePosition, _distanceBetweenCells, entry);
+            var maze = await _factory.InstantiateMaze
+                (width,
+                 height,
+                 mazePosition,
+                 _distanceBetweenCells,
+                 entry);
 
             AddObstacles(maze);
 
