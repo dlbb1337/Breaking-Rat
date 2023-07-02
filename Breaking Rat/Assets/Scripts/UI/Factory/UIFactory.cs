@@ -1,4 +1,5 @@
 using BreakingRat.Infrastructure.Services.AssetManagement;
+using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,24 +15,30 @@ namespace BreakingRat.UI.Factory
             _assetProvider = assetProvider;
         }
 
-        public Button CreateLevelButton(Transform parent) =>
-            _assetProvider
-            .Instantiate(AssetPaths.LevelButtonPrefabPath, parent)
-            .GetComponent<Button>();
-
-        public CanvasGroup InstantiateCurtain()
+        public async Task<Button> CreateLevelButtonAsync(Transform parent)
         {
-            var UIRoot = CreateUIRoot();
+            var button = await _assetProvider
+            .Instantiate(AssetPaths.LevelButtonPrefabPath, parent);
 
-            var curtain = _assetProvider.Instantiate
-                (AssetPaths.CurtainPrefabPath, UIRoot.transform).GetComponent<CanvasGroup>();
-
-            return curtain;
+            return button.GetComponent<Button>();
         }
 
-        public Canvas CreateUIRoot() =>
-            _assetProvider
-            .Instantiate(AssetPaths.UIRootPrefabPath)
-            .GetComponent<Canvas>();
+        public async Task<CanvasGroup> InstantiateCurtainAsync()
+        {
+            var UIRoot = await CreateUIRootAsync();
+
+            var gameObject = await _assetProvider.Instantiate
+                (AssetPaths.CurtainPrefabPath, UIRoot.transform);
+
+            return gameObject.GetComponent<CanvasGroup>();
+        }
+
+        public async Task<Canvas> CreateUIRootAsync()
+        {
+            var gameObject =  await _assetProvider
+            .Instantiate(AssetPaths.UIRootPrefabPath);
+
+            return gameObject.GetComponent<Canvas>();
+        }
     }
 }

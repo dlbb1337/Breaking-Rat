@@ -4,6 +4,7 @@ using BreakingRat.Infrastructure;
 using BreakingRat.Infrastructure.States;
 using BreakingRat.UI.Factory;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -34,15 +35,17 @@ namespace BreakingRat.UI
             _progressService = progressService;
             _stateMachine = stateMachine;
 
-            LoadLevels();
+            LoadLevelsAsync();
         }
 
-        public void LoadLevels()
+        public async Task LoadLevelsAsync()
         {
+            await _staticDataService.InitializeAsync();
+
             var datas = _staticDataService.LevelStaticDatas;
 
             foreach (var data in datas)
-                CreateLevelButton(data);
+                await CreateLevelButtonAsync(data);
 
             DisableLevelsDisplay();
 
@@ -57,9 +60,9 @@ namespace BreakingRat.UI
         public void DisableLevelsDisplay() =>
             _display.gameObject.SetActive(false);
 
-        private void CreateLevelButton(LevelStaticData data)
+        private async Task CreateLevelButtonAsync(LevelStaticData data)
         {
-            var button = _factory.CreateLevelButton(_content);
+            var button = await _factory.CreateLevelButtonAsync(_content);
 
             button.onClick.AddListener(() => OnButtonClick(data));
             var text = button.GetComponentInChildren<TMP_Text>();

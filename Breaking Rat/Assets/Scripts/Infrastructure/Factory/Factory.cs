@@ -5,6 +5,7 @@ using BreakingRat.GameLogic.PlayerLogic;
 using BreakingRat.Infrastructure.Services.AssetManagement;
 using BreakingRat.UI;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace BreakingRat.Infrastructure.Factory
@@ -20,21 +21,21 @@ namespace BreakingRat.Infrastructure.Factory
             _assetProvider = assetProvider;
         }
 
-        public Maze InstantiateMaze
+        public async Task<Maze> InstantiateMaze
             (int width, int height, Vector3 mazePosition, float distanceBetweenCells, TemplateCell? entry = null)
         {
             var templateMaze = _mazeGenerator.Generate(width, height, entry);
 
-            return InstantiateMaze(templateMaze, mazePosition, distanceBetweenCells, entry);
+            return await InstantiateMaze(templateMaze, mazePosition, distanceBetweenCells, entry);
         }
 
-        public Maze InstantiateMaze
+        public async Task<Maze> InstantiateMaze
             (TemplateMaze templateMaze, Vector3 mazePosition, float distanceBetweenCells, TemplateCell? entry = null)
         {
             var width = templateMaze.Width;
             var height = templateMaze.Height;
 
-            Maze maze = _assetProvider.InstantiateWithDI<Maze>
+            Maze maze = await _assetProvider.InstantiateWithDI<Maze>
                 (AssetPaths.MazePrefabPath, mazePosition, Quaternion.identity);
 
             var cells = new Cell[width, height];
@@ -43,11 +44,11 @@ namespace BreakingRat.Infrastructure.Factory
             {
                 for (int y = 0; y < height; y++)
                 {
-                    cells[x, y] = SpawnCell(templateMaze[x, y], distanceBetweenCells, maze.transform);
+                    cells[x, y] = await SpawnCell(templateMaze[x, y], distanceBetweenCells, maze.transform);
                 }
             }
 
-            var bounds = SpawnBounds(templateMaze, distanceBetweenCells, maze);
+            var bounds = await SpawnBounds(templateMaze, distanceBetweenCells, maze);
 
             maze.Construct(templateMaze, cells, bounds);
 
@@ -56,17 +57,17 @@ namespace BreakingRat.Infrastructure.Factory
             return maze;
         }
 
-        private Cell[] SpawnBounds(TemplateMaze templateMaze, float distanceBetweenCells, Maze maze)
+        private async Task<Cell[]>  SpawnBounds(TemplateMaze templateMaze, float distanceBetweenCells, Maze maze)
         {
             var bounds = new List<Cell>();
 
             foreach (var templateCell in templateMaze.Bounds)
-                bounds.Add(SpawnCell(templateCell, distanceBetweenCells, maze.transform));
+                bounds.Add(await SpawnCell(templateCell, distanceBetweenCells, maze.transform));
 
             return bounds.ToArray();
         }
 
-        private Cell SpawnCell(TemplateCell templateCell, float distanceBetweenCells, Transform parent)
+        private async Task<Cell> SpawnCell(TemplateCell templateCell, float distanceBetweenCells, Transform parent)
         {
             float positionX = templateCell.X * distanceBetweenCells + parent.position.x;
             float positionY = templateCell.Y * distanceBetweenCells + parent.position.y;
@@ -74,7 +75,7 @@ namespace BreakingRat.Infrastructure.Factory
 
             var position = new Vector3(positionX, positionY, positionZ);
 
-            Cell cell = _assetProvider.InstantiateWithDI<Cell>
+            Cell cell = await _assetProvider.InstantiateWithDI<Cell>
                 (AssetPaths.CellPrefabPath, position, Quaternion.identity, parent);
 
 
@@ -87,32 +88,32 @@ namespace BreakingRat.Infrastructure.Factory
             return cell;
         }
 
-        public Deadzone CreateDeadzone(Vector3 position, Quaternion rotation, Transform parent = null) =>
+        public Task<Deadzone> CreateDeadzone(Vector3 position, Quaternion rotation, Transform parent = null) =>
             _assetProvider.InstantiateWithDI<Deadzone>
                 (AssetPaths.DeadzonePrefabPath, position, rotation);
 
-        public PlayerMovement CreatePlayer(Vector3 position, Quaternion rotation, Transform parent = null) =>
+        public Task<PlayerMovement> CreatePlayer(Vector3 position, Quaternion rotation, Transform parent = null) =>
             _assetProvider.InstantiateWithDI<PlayerMovement>
                             (AssetPaths.PlayerPrefabPath, position, rotation);
 
         public void Remove(GameObject obj) =>
             GameObject.Destroy(obj);
 
-        public HUD CreateHUD() =>
+        public Task<HUD> CreateHUD() =>
             _assetProvider.InstantiateWithDI<HUD>(AssetPaths.HUDPrefabPath);
 
         public void CreateDeathScreen() =>
             _assetProvider.InstantiateWithDI<DeathScreen>(AssetPaths.DeathScreenPrefabPath);
 
-        public MovingWall CreateMovingWall(Vector3 position, Quaternion rotation, Transform parent = null) =>
+        public Task<MovingWall> CreateMovingWall(Vector3 position, Quaternion rotation, Transform parent = null) =>
             _assetProvider.InstantiateWithDI<MovingWall>
                 (AssetPaths.MovingWallPrefabPath, position, rotation, parent);
 
-        public Gun CreateGun(Vector3 position, Quaternion rotation, Transform parent = null) =>
+        public Task<Gun> CreateGun(Vector3 position, Quaternion rotation, Transform parent = null) =>
             _assetProvider.InstantiateWithDI<Gun>
                 (AssetPaths.GunPrefabPath, position, rotation, parent);
 
-        public Bullet CreateBullet(Vector3 position, Quaternion rotation, Transform parent = null) =>
+        public Task<Bullet> CreateBullet(Vector3 position, Quaternion rotation, Transform parent = null) =>
             _assetProvider.InstantiateWithDI<Bullet>
                 (AssetPaths.BulletPrefabPath, position, rotation, parent);
     }

@@ -1,6 +1,7 @@
 using BreakingRat.Data.Obstacles;
 using BreakingRat.GameLogic.Location.MazeLogic;
 using BreakingRat.Infrastructure.Factory;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace BreakingRat.GameLogic.Obstacles
@@ -17,7 +18,7 @@ namespace BreakingRat.GameLogic.Obstacles
             _factory = factory;
         }
 
-        public void Add(Maze maze, ObstaclesStaticData data)
+        public async Task AddAsync(Maze maze, ObstaclesStaticData data)
         {
             _data = data as MovingWallsStaticData;
 
@@ -25,16 +26,16 @@ namespace BreakingRat.GameLogic.Obstacles
 
             for (int i = 0; i < countPerMaze; i++)
             {
-                CreateMovingWall(maze, _data);
+                await CreateMovingWallAsync(maze, _data);
             }
         }
 
-        private void CreateMovingWall(Maze maze, MovingWallsStaticData data)
+        private async Task CreateMovingWallAsync(Maze maze, MovingWallsStaticData data)
         {
             var rndY = Random.Range(0, maze.Height);
             var rndX = Random.Range(0, maze.Width);
 
-            var wall = _factory.CreateMovingWall(maze[rndX,rndY].transform.position, Quaternion.identity, maze.transform);
+            var wall = await _factory.CreateMovingWall(maze[rndX,rndY].transform.position, Quaternion.identity, maze.transform);
 
             wall.Construct
                 (Random.Range(data.MinMovementSpeed, data.MaxMovementSpeed),

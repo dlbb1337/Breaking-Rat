@@ -9,14 +9,14 @@ namespace BreakingRat.Infrastructure.Services.Input.InputSystem
         public event Action onEnable;
         public event Action onDisable;
 
-        private void OnEnable()
+        public void OnEnable()
         {
             PlayerControl = new();
             PlayerControl.Enable();
             onEnable?.Invoke();
         }
 
-        private void OnDisable()
+        public void OnDisable()
         {
             PlayerControl.Disable();
             onDisable?.Invoke();

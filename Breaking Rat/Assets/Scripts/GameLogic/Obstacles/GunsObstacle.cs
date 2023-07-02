@@ -3,6 +3,7 @@ using BreakingRat.GameLogic.DeathLogic.Services;
 using BreakingRat.GameLogic.Location.MazeLogic;
 using BreakingRat.GameLogic.Obstacles.GameObjects;
 using BreakingRat.Infrastructure.Factory;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace BreakingRat.GameLogic.Obstacles
@@ -21,27 +22,27 @@ namespace BreakingRat.GameLogic.Obstacles
             _factory = factory;
         }
 
-        public void Add(Maze maze, ObstaclesStaticData data)
+        public async Task AddAsync(Maze maze, ObstaclesStaticData data)
         {
             _data = data as GunsStaticData;
 
             var countPerMaze = _data.CountPerMaze;
 
             for (int i = 0; i < countPerMaze; i++)
-                CreateGun(maze, _data);
+                await CreateGun(maze, _data);
         }
 
-        private void CreateGun(Maze maze, GunsStaticData data)
+        private async Task CreateGun(Maze maze, GunsStaticData data)
         {
             var rightOrLeft = Random.Range(0, 2) % 2 == 0;
             Vector3 position = GetGunPosition(maze, data, rightOrLeft);
-            var gun = _factory.CreateGun(position, Quaternion.identity, maze.transform);
+            var gun = await _factory.CreateGun(position, Quaternion.identity, maze.transform);
 
             SetGunValues(data, rightOrLeft, gun);
 
             for (int i = 0; i < data.BulletsCapacity; i++)
             {
-                var bullet = Createbullet(data, position, rightOrLeft ? Vector3.left : Vector3.right, gun.transform);
+                var bullet = await CreatebulletAsync(data, position, rightOrLeft ? Vector3.left : Vector3.right, gun.transform);
                 gun.Bullets.Add(bullet);
                 bullet.gameObject.SetActive(false);
                 bullet.Trigger.Enter.AddListener(collider => _deathService.Death());
@@ -76,9 +77,10 @@ namespace BreakingRat.GameLogic.Obstacles
             return position;
         }
 
-        private Bullet Createbullet(GunsStaticData data, Vector3 position, Vector3 direction, Transform parent)
+        private async Task<Bullet> CreatebulletAsync
+            (GunsStaticData data, Vector3 position, Vector3 direction, Transform parent)
         {
-            var bullet = _factory.CreateBullet(position, Quaternion.identity, parent);
+            var bullet = await _factory.CreateBullet(position, Quaternion.identity, parent);
 
             bullet.MovementSpeed = Random.Range(data.MinProjectileSpeed, data.MaxProjectileSpeed);
             bullet.Direction = direction;

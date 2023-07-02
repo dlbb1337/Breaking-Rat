@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,8 +6,8 @@ namespace BreakingRat.UI.Factory
 {
     public interface IUIFactory
     {
-        Canvas CreateUIRoot();
-        Button CreateLevelButton(Transform parent);
-        public CanvasGroup InstantiateCurtain();
+        Task<Canvas> CreateUIRootAsync();
+        Task<Button> CreateLevelButtonAsync(Transform parent);
+        public Task<CanvasGroup> InstantiateCurtainAsync();
     }
 }

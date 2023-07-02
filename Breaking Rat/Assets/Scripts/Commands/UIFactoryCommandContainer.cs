@@ -2,6 +2,7 @@ using BreakingRat.UI.Factory;
 using GameConsole.CommandTools;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -28,9 +29,9 @@ namespace BreakingRat.Commands
             Debug.Log($"size after: {camera.orthographicSize}");
         }
 
-        public void CreateCurtain()
+        public async Task CreateCurtainAsync()
         {
-            _curtains.Add(_factory.InstantiateCurtain());
+            _curtains.Add(await _factory.InstantiateCurtainAsync());
         }
 
         public void DestroyCurtain()
@@ -70,7 +71,6 @@ namespace BreakingRat.Commands
             while (i < 5)
             {
                 i++;
-                Debug.Log("hui");
                 yield return null;
             }
         }
