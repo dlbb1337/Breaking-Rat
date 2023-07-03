@@ -6,6 +6,10 @@ namespace BreakingRat.Infrastructure.Services.AssetManagement
 {
     public interface IAssetProvider
     {
+        public bool Initialized { get; }
+
+        public Task InitializeAsync();
+
         public Task<T> Load<T>(AssetReference assetReference) where T : class;
 
         public Task<T> Load<T>(string address) where T : class;

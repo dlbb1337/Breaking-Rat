@@ -50,6 +50,10 @@ namespace BreakingRat.GameLogic
         {
             _gameStateMachine.EnterState<InitializeState>();
 
+            if (_staticDataService.Initialized == false)
+            {
+                await _staticDataService.InitializeAsync();
+            }
             var lvl = _staticDataService.CurrentLevelStaticData;
 
             var player = await PlayerAsync(lvl.PlayerStaticData);

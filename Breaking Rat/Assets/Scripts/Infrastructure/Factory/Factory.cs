@@ -57,7 +57,7 @@ namespace BreakingRat.Infrastructure.Factory
             return maze;
         }
 
-        private async Task<Cell[]>  SpawnBounds(TemplateMaze templateMaze, float distanceBetweenCells, Maze maze)
+        private async Task<Cell[]> SpawnBounds(TemplateMaze templateMaze, float distanceBetweenCells, Maze maze)
         {
             var bounds = new List<Cell>();
 
@@ -69,6 +69,7 @@ namespace BreakingRat.Infrastructure.Factory
 
         private async Task<Cell> SpawnCell(TemplateCell templateCell, float distanceBetweenCells, Transform parent)
         {
+
             float positionX = templateCell.X * distanceBetweenCells + parent.position.x;
             float positionY = templateCell.Y * distanceBetweenCells + parent.position.y;
             float positionZ = 0 + parent.position.z;
@@ -88,33 +89,69 @@ namespace BreakingRat.Infrastructure.Factory
             return cell;
         }
 
-        public Task<Deadzone> CreateDeadzone(Vector3 position, Quaternion rotation, Transform parent = null) =>
-            _assetProvider.InstantiateWithDI<Deadzone>
-                (AssetPaths.DeadzonePrefabPath, position, rotation);
+        public async Task<Deadzone> CreateDeadzone
+            (Vector3 position,
+             Quaternion rotation,
+             Transform parent = null)
+        {
 
-        public Task<PlayerMovement> CreatePlayer(Vector3 position, Quaternion rotation, Transform parent = null) =>
-            _assetProvider.InstantiateWithDI<PlayerMovement>
+            return await _assetProvider.InstantiateWithDI<Deadzone>
+                (AssetPaths.DeadzonePrefabPath, position, rotation);
+        }
+
+        public async Task<PlayerMovement> CreatePlayer
+            (Vector3 position,
+             Quaternion rotation,
+             Transform parent = null)
+        {
+
+            return await _assetProvider.InstantiateWithDI<PlayerMovement>
                             (AssetPaths.PlayerPrefabPath, position, rotation);
+        }
 
         public void Remove(GameObject obj) =>
             GameObject.Destroy(obj);
 
-        public Task<HUD> CreateHUD() =>
-            _assetProvider.InstantiateWithDI<HUD>(AssetPaths.HUDPrefabPath);
+        public async Task<HUD> CreateHUD()
+        {
 
-        public void CreateDeathScreen() =>
-            _assetProvider.InstantiateWithDI<DeathScreen>(AssetPaths.DeathScreenPrefabPath);
+            return await _assetProvider.InstantiateWithDI<HUD>(AssetPaths.HUDPrefabPath);
+        }
 
-        public Task<MovingWall> CreateMovingWall(Vector3 position, Quaternion rotation, Transform parent = null) =>
-            _assetProvider.InstantiateWithDI<MovingWall>
+        public async Task<DeathScreen> CreateDeathScreenAsync()
+        {
+
+            return await _assetProvider.InstantiateWithDI<DeathScreen>(AssetPaths.DeathScreenPrefabPath);
+        }
+
+        public async Task<MovingWall> CreateMovingWall
+            (Vector3 position,
+             Quaternion rotation,
+             Transform parent = null)
+        {
+
+            return await _assetProvider.InstantiateWithDI<MovingWall>
                 (AssetPaths.MovingWallPrefabPath, position, rotation, parent);
+        }
 
-        public Task<Gun> CreateGun(Vector3 position, Quaternion rotation, Transform parent = null) =>
-            _assetProvider.InstantiateWithDI<Gun>
+        public async Task<Gun> CreateGun
+            (Vector3 position,
+             Quaternion rotation,
+             Transform parent = null)
+        {
+
+            return await _assetProvider.InstantiateWithDI<Gun>
                 (AssetPaths.GunPrefabPath, position, rotation, parent);
+        }
 
-        public Task<Bullet> CreateBullet(Vector3 position, Quaternion rotation, Transform parent = null) =>
-            _assetProvider.InstantiateWithDI<Bullet>
+        public async Task<Bullet> CreateBullet
+            (Vector3 position,
+             Quaternion rotation,
+             Transform parent = null)
+        {
+
+            return await _assetProvider.InstantiateWithDI<Bullet>
                 (AssetPaths.BulletPrefabPath, position, rotation, parent);
+        }
     }
 }
