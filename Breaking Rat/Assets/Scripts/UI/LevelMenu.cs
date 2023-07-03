@@ -40,6 +40,7 @@ namespace BreakingRat.UI
 
         public async Task LoadLevelsAsync()
         {
+            if(_staticDataService.Initialized == false)
             await _staticDataService.InitializeAsync();
 
             var datas = _staticDataService.LevelStaticDatas;

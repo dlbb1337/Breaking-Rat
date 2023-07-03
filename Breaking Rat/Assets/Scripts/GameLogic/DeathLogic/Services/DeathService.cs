@@ -27,7 +27,7 @@ namespace BreakingRat.GameLogic.DeathLogic.Services
         {
             _pauseService.PauseGame();
             _recordService.UpdateRecord();
-            _factory.CreateDeathScreen();
+            _factory.CreateDeathScreenAsync();
             _adsService.ShowAd();
         }
     }

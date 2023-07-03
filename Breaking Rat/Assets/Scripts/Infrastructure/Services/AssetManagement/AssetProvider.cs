@@ -15,18 +15,26 @@ namespace BreakingRat.Infrastructure.Services.AssetManagement
                 new Dictionary<string, List<AsyncOperationHandle>>();
         private readonly IInstantiator _instantiator;
 
+        public bool Initialized { get; private set; } = false;
+
         public AssetProvider(IInstantiator instantiator)
         {
             _instantiator = instantiator;
         }
 
-        public void Initialize()
+        public async Task InitializeAsync()
         {
-            Addressables.InitializeAsync();
+            await Addressables.InitializeAsync().Task;
+            Initialized = true;
         }
 
         public async Task<T> Load<T>(AssetReference assetReference) where T : class
         {
+            if (Initialized == false)
+            {
+                await InitializeAsync();
+            }
+
             if (_completedCashe.TryGetValue
                       (assetReference.AssetGUID, out AsyncOperationHandle completedHandle))
                 return completedHandle.Result as T;
@@ -38,6 +46,11 @@ namespace BreakingRat.Infrastructure.Services.AssetManagement
 
         public async Task<T> Load<T>(string address) where T : class
         {
+            if (Initialized == false)
+            {
+                await InitializeAsync();
+            }
+
             if (_completedCashe.TryGetValue(address, out AsyncOperationHandle completedHandle))
                 return completedHandle.Result as T;
 
@@ -82,14 +95,31 @@ namespace BreakingRat.Infrastructure.Services.AssetManagement
             resourceHandles.Add(handle);
         }
 
-        public Task<GameObject> Instantiate(string address, Vector3 at) =>
-          Addressables.InstantiateAsync(address, at, Quaternion.identity).Task;
+        public async Task<GameObject> Instantiate(string address, Vector3 at)
+        {
+            if (Initialized == false)
+            {
+                await InitializeAsync();
+            }
+            return await Addressables.InstantiateAsync(address, at, Quaternion.identity).Task;
+        }
 
-        public Task<GameObject> Instantiate(string address) =>
-          Addressables.InstantiateAsync(address).Task;
+        public async Task<GameObject> Instantiate(string address)
+        {
+            if (Initialized == false)
+            {
+                await InitializeAsync();
+            }
+
+            return await Addressables.InstantiateAsync(address).Task;
+        }
 
         public async Task<T> InstantiateWithDI<T>(string path) where T : class
         {
+            if (Initialized == false)
+            {
+                await InitializeAsync();
+            }
             var prefab = await Load<GameObject>(path);
 
             return _instantiator.InstantiatePrefabForComponent<T>(prefab);
@@ -101,6 +131,11 @@ namespace BreakingRat.Infrastructure.Services.AssetManagement
              Quaternion rotation,
              Transform parent = null) where T : class
         {
+            if (Initialized == false)
+            {
+                await InitializeAsync();
+            }
+
             GameObject prefab = await Load<GameObject>(path);
 
             return _instantiator.InstantiatePrefabForComponent<T>
@@ -109,6 +144,10 @@ namespace BreakingRat.Infrastructure.Services.AssetManagement
 
         public async Task<Object> Instantiate(string address, Transform parent = null) 
         {
+            if (Initialized == false)
+            {
+                await InitializeAsync();
+            }
             return await Addressables.InstantiateAsync(address, parent).Task;
         }
     }

@@ -6,6 +6,7 @@ namespace BreakingRat.Data.Services
     public interface IStaticDataService
     {
         public int LevelId { get; }
+        public bool Initialized { get; }
         public void SetLevelId(int id);
         Task InitializeAsync();
 

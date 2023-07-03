@@ -1,5 +1,6 @@
 using BreakingRat.GameLogic.Services;
 using BreakingRat.Infrastructure;
+using BreakingRat.Infrastructure.Services.AssetManagement;
 using BreakingRat.Infrastructure.States;
 using TMPro;
 using UnityEngine;
@@ -16,14 +17,29 @@ namespace BreakingRat.GameLogic.DeathLogic
         private GameStateMachine _gameStateMachine;
 
         [Inject]
-        private void Construct(GameStateMachine gameStateMachine, IScoreService scoreService, IRecordService recordService)
+        private void Construct
+            (GameStateMachine gameStateMachine,
+             IScoreService scoreService,
+             IRecordService recordService,
+             IAssetProvider assetProvider)
         {
             _gameStateMachine = gameStateMachine;
 
             _scoreAndRecordText.text = $"Score: {scoreService.Score} \nRecord: {recordService.Record}";
 
-            _playAgainButton.onClick.AddListener(() => _gameStateMachine.EnterState<LoadSceneState, string>("Level"));
-            _menuButton.onClick.AddListener(() => _gameStateMachine.EnterState<LoadSceneState, string>("Menu"));
+            _playAgainButton.onClick.AddListener(() =>
+            {
+                assetProvider.Cleanup();
+
+                _gameStateMachine.EnterState<LoadSceneState, string>("Level");
+            });
+
+            _menuButton.onClick.AddListener(() =>
+            {
+                assetProvider.Cleanup();
+
+                _gameStateMachine.EnterState<LoadSceneState, string>("Menu");
+            });
         }
     }
 }

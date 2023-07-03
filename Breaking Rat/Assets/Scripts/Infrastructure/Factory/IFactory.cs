@@ -26,7 +26,7 @@ namespace BreakingRat.Infrastructure.Factory
 
         public void Remove(GameObject obj);
 
-        void CreateDeathScreen();
+        Task<DeathScreen> CreateDeathScreenAsync();
 
         Task<Deadzone> CreateDeadzone
             (Vector3 position, Quaternion rotation, Transform parent = null);

@@ -1,4 +1,5 @@
 using BreakingRat.Infrastructure;
+using BreakingRat.Infrastructure.Services.AssetManagement;
 using BreakingRat.Infrastructure.States;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,11 +14,15 @@ namespace BreakingRat.UI
         private GameStateMachine _gameStateMachine;
 
         [Inject]
-        private void Construct(GameStateMachine gameStateMachine)
+        private void Construct(GameStateMachine gameStateMachine,IAssetProvider assetProvider)
         {
             _gameStateMachine = gameStateMachine;
 
-            _button.onClick.AddListener(() => _gameStateMachine.EnterState<LoadSceneState, string>(_sceneName));
+            _button.onClick.AddListener(() =>
+            {
+                assetProvider.Cleanup();
+                _gameStateMachine.EnterState<LoadSceneState, string>(_sceneName);
+            });
         }
     }
 }
