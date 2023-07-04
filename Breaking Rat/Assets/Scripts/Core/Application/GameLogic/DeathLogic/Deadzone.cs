@@ -1,8 +1,6 @@
 using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
-using BreakingRat.GameLogic.DeathLogic.Services;
 using UnityEngine;
 using Zenject;
-using IFactory = BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services.IFactory;
 
 namespace BreakingRat.Assets.Scripts.Core.Application.GameLogic.DeathLogic
 {

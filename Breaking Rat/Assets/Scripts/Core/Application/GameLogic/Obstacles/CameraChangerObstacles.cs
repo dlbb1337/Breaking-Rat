@@ -1,11 +1,7 @@
 using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
 using BreakingRat.Assets.Scripts.Core.Application.GameLogic.Location.MazeLogic;
 using BreakingRat.Assets.Scripts.Core.Domain.Data.Obstacles;
-using BreakingRat.UI;
-using System.Collections;
 using System.Threading.Tasks;
-using Unity.VisualScripting;
-using UnityEngine;
 
 namespace BreakingRat.Assets.Scripts.Core.Application.GameLogic.Obstacles
 {

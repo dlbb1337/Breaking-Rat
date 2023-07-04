@@ -15,7 +15,7 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-namespace BreakingRat.Infrastructure.Services.Input.InputSystem
+namespace BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services.Input.InputSystem
 {
     public partial class @PlayerControl : IInputActionCollection2, IDisposable
     {

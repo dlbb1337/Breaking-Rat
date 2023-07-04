@@ -1,16 +1,15 @@
+using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
 using BreakingRat.Assets.Scripts.Core.Application.GameLogic;
 using BreakingRat.Assets.Scripts.Core.Application.GameLogic.DeathLogic;
 using BreakingRat.Assets.Scripts.Core.Application.GameLogic.PlayerLogic;
+using BreakingRat.Assets.Scripts.Core.Application.Services;
 using BreakingRat.Assets.Scripts.Core.Application.StateMachine;
 using BreakingRat.Assets.Scripts.Core.Application.StateMachine.States;
-using BreakingRat.Assets.Scripts.Core.Application.Services;
-using BreakingRat.UI;
+using BreakingRat.Assets.Scripts.Core.Domain.Data;
+using BreakingRat.Assets.Scripts.Core.Domain.Data.Obstacles;
 using System.Threading.Tasks;
 using UnityEngine;
 using IFactory = BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services.IFactory;
-using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
-using BreakingRat.Assets.Scripts.Core.Domain.Data.Obstacles;
-using BreakingRat.Assets.Scripts.Core.Domain.Data;
 
 namespace BreakingRat.Assets.Scripts.Presentation
 {

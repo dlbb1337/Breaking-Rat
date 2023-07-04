@@ -1,4 +1,4 @@
-using BreakingRat.Infrastructure.Services.Input.InputSystem;
+using BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services.Input.InputSystem;
 using System;
 using UnityEngine;
 
