@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace BreakingRat.Data.Obstacles
+namespace BreakingRat.Assets.Scripts.Core.Domain.Data.Obstacles
 {
     [CreateAssetMenu(fileName = "MovingWallsStaticData", menuName = "StaticData/MovingWallsStaticData")]
     public class MovingWallsStaticData : ObstaclesStaticData

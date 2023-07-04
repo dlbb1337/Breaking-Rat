@@ -1,10 +1,10 @@
-using BreakingRat.Data.Obstacles;
-using BreakingRat.GameLogic.Location.MazeLogic;
-using BreakingRat.Infrastructure.Factory;
+using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
+using BreakingRat.Assets.Scripts.Core.Application.GameLogic.Location.MazeLogic;
+using BreakingRat.Assets.Scripts.Core.Domain.Data.Obstacles;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace BreakingRat.GameLogic.Obstacles
+namespace BreakingRat.Assets.Scripts.Core.Application.GameLogic.Obstacles
 {
     public class MovingWalls : IObstacles
     {
@@ -35,7 +35,7 @@ namespace BreakingRat.GameLogic.Obstacles
             var rndY = Random.Range(0, maze.Height);
             var rndX = Random.Range(0, maze.Width);
 
-            var wall = await _factory.CreateMovingWall(maze[rndX,rndY].transform.position, Quaternion.identity, maze.transform);
+            var wall = await _factory.CreateMovingWall(maze[rndX, rndY].transform.position, Quaternion.identity, maze.transform);
 
             wall.Construct
                 (Random.Range(data.MinMovementSpeed, data.MaxMovementSpeed),

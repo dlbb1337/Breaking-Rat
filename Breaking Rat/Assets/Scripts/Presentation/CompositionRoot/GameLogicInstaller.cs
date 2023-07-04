@@ -1,19 +1,16 @@
-using BreakingRat.GameLogic;
-using BreakingRat.GameLogic.DeathLogic.Services;
-using BreakingRat.GameLogic.Location.MazeLogic;
-using BreakingRat.GameLogic.Obstacles;
-using BreakingRat.GameLogic.Services;
-using BreakingRat.Infrastructure.Services.Ads;
-using BreakingRat.Infrastructure.Services.AssetManagement;
-using BreakingRat.Infrastructure.Services.Input;
-using BreakingRat.Infrastructure.Services.Input.InputSystem;
-using BreakingRat.UI.Factory;
+using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
+using BreakingRat.Assets.Scripts.Core.Application.GameLogic.Obstacles;
+using BreakingRat.Assets.Scripts.Core.Application.Services;
+using BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services;
+using BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services.Ads;
+using BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services.AssetManagement;
+using BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services.InputSystem;
 using UnityEngine;
 using Zenject;
-using Factory = BreakingRat.Infrastructure.Factory.Factory;
-using IFactory = BreakingRat.Infrastructure.Factory.IFactory;
+using Factory = BreakingRat.Assets.Scripts.Core.Application.Services.Factory;
+using IFactory = BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services.IFactory;
 
-namespace BreakingRat.CompositionRoot
+namespace BreakingRat.Assets.Scripts.Presentation.CompositionRoot
 {
     public class GameLogicInstaller : MonoInstaller
     {

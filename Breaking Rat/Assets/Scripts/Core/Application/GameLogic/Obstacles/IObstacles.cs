@@ -1,8 +1,8 @@
-using BreakingRat.Data.Obstacles;
-using BreakingRat.GameLogic.Location.MazeLogic;
+using BreakingRat.Assets.Scripts.Core.Application.GameLogic.Location.MazeLogic;
+using BreakingRat.Assets.Scripts.Core.Domain.Data.Obstacles;
 using System.Threading.Tasks;
 
-namespace BreakingRat.GameLogic.Obstacles
+namespace BreakingRat.Assets.Scripts.Core.Application.GameLogic.Obstacles
 {
     public interface IObstacles
     {

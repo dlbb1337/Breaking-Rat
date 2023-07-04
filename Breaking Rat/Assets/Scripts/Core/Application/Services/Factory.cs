@@ -1,14 +1,16 @@
-using BreakingRat.GameLogic.DeathLogic;
-using BreakingRat.GameLogic.Location.MazeLogic;
-using BreakingRat.GameLogic.Obstacles.GameObjects;
-using BreakingRat.GameLogic.PlayerLogic;
-using BreakingRat.Infrastructure.Services.AssetManagement;
-using BreakingRat.UI;
+using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
+using BreakingRat.Assets.Scripts.Core.Application.GameLogic.DeathLogic;
+using BreakingRat.Assets.Scripts.Core.Application.GameLogic.Location.MazeLogic;
+using BreakingRat.Assets.Scripts.Core.Application.GameLogic.Obstacles.GameObjects;
+using BreakingRat.Assets.Scripts.Core.Application.GameLogic.PlayerLogic;
+using BreakingRat.Assets.Scripts.Core.Application.UI;
+using BreakingRat.Assets.Scripts.Core.Domain.Entities;
+using BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services.AssetManagement;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace BreakingRat.Infrastructure.Factory
+namespace BreakingRat.Assets.Scripts.Core.Application.Services
 {
     public class Factory : IFactory
     {
@@ -121,7 +123,7 @@ namespace BreakingRat.Infrastructure.Factory
         }
 
         public void Remove(GameObject obj) =>
-            GameObject.Destroy(obj);
+            Object.Destroy(obj);
 
         public async Task<HUD> CreateHUD()
         {

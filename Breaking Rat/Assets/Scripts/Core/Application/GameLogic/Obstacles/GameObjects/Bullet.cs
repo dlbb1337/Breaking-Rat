@@ -1,8 +1,8 @@
-using BreakingRat.GameLogic.Services;
+using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
 using UnityEngine;
 using Zenject;
 
-namespace BreakingRat.GameLogic.Obstacles.GameObjects
+namespace BreakingRat.Assets.Scripts.Core.Application.GameLogic.Obstacles.GameObjects
 {
     public class Bullet : MonoBehaviour
     {

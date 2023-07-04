@@ -1,8 +1,10 @@
+using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
+using BreakingRat.Assets.Scripts.Core.Domain.Entities;
 using System;
 using System.IO;
 using UnityEngine;
 
-namespace BreakingRat.Data.Services
+namespace BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services
 {
     public class ProgressService : IProgressService
     {
@@ -38,7 +40,7 @@ namespace BreakingRat.Data.Services
 
         public void LoadProgress()
         {
-            var json = String.Empty;
+            var json = string.Empty;
 
             using (var reader = new StreamReader(_filePath))
             {
@@ -49,7 +51,7 @@ namespace BreakingRat.Data.Services
             }
 
 
-            if (String.IsNullOrEmpty(json))
+            if (string.IsNullOrEmpty(json))
                 return;
 
             _progress = JsonUtility.FromJson<Progress>(json);

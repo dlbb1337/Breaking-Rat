@@ -1,6 +1,6 @@
 using System;
 
-namespace BreakingRat.GameLogic.Services
+namespace BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services
 {
     public interface IPauseService
     {

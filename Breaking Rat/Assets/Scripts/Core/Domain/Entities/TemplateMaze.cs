@@ -1,6 +1,6 @@
 using System;
 
-namespace BreakingRat.GameLogic.Location.MazeLogic
+namespace BreakingRat.Assets.Scripts.Core.Domain.Entities
 {
     public class TemplateMaze
     {

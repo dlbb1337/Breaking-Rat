@@ -1,9 +1,10 @@
+using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.EventSystems;
 
-namespace BreakingRat.Infrastructure.Services.Ads
+namespace BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services.Ads
 {
     public class AdsService :
         IAdsService,
@@ -73,13 +74,13 @@ namespace BreakingRat.Infrastructure.Services.Ads
         {
             Debug.Log("Unity Ads initialization complete.");
 
-            var eventSystems = GameObject.FindObjectsOfType<EventSystem>();
+            var eventSystems = Object.FindObjectsOfType<EventSystem>();
 
             if (eventSystems.Length > 1)
             {
                 for (int i = 1; i < eventSystems.Length; i++)
                 {
-                    GameObject.Destroy(eventSystems[i].gameObject);
+                    Object.Destroy(eventSystems[i].gameObject);
                 }
             }
         }

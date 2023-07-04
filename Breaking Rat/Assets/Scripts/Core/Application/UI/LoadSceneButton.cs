@@ -1,11 +1,11 @@
-using BreakingRat.Infrastructure;
-using BreakingRat.Infrastructure.Services.AssetManagement;
-using BreakingRat.Infrastructure.States;
+using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
+using BreakingRat.Assets.Scripts.Core.Application.StateMachine;
+using BreakingRat.Assets.Scripts.Core.Application.StateMachine.States;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace BreakingRat.UI
+namespace BreakingRat.Assets.Scripts.Core.Application.UI
 {
     public class LoadSceneButton : MonoBehaviour
     {
@@ -14,7 +14,7 @@ namespace BreakingRat.UI
         private GameStateMachine _gameStateMachine;
 
         [Inject]
-        private void Construct(GameStateMachine gameStateMachine,IAssetProvider assetProvider)
+        private void Construct(GameStateMachine gameStateMachine, IAssetProvider assetProvider)
         {
             _gameStateMachine = gameStateMachine;
 

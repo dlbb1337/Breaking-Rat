@@ -1,8 +1,9 @@
-using BreakingRat.Infrastructure;
-using BreakingRat.Infrastructure.States;
+using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
+using BreakingRat.Assets.Scripts.Core.Application.StateMachine;
+using BreakingRat.Assets.Scripts.Core.Application.StateMachine.States;
 using System;
 
-namespace BreakingRat.GameLogic.Services
+namespace BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services
 {
     public class PauseService : IPauseService
     {

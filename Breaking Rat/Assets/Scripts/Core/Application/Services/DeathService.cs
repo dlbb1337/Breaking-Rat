@@ -1,8 +1,6 @@
-using BreakingRat.GameLogic.Services;
-using BreakingRat.Infrastructure.Factory;
-using BreakingRat.Infrastructure.Services.Ads;
+using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
 
-namespace BreakingRat.GameLogic.DeathLogic.Services
+namespace BreakingRat.Assets.Scripts.Core.Application.Services
 {
     public class DeathService : IDeathService
     {

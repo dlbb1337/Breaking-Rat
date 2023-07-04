@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace BreakingRat.Data
+namespace BreakingRat.Assets.Scripts.Core.Domain.Data
 {
     [CreateAssetMenu(fileName = "PlayerStaticData", menuName = "StaticData/PlayerStaticData")]
     public class PlayerStaticData : ScriptableObject

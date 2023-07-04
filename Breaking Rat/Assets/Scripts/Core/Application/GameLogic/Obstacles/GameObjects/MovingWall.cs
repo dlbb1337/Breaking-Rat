@@ -1,8 +1,8 @@
-using BreakingRat.GameLogic.Services;
+using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
 using UnityEngine;
 using Zenject;
 
-namespace BreakingRat.GameLogic.Obstacles.GameObjects
+namespace BreakingRat.Assets.Scripts.Core.Application.GameLogic.Obstacles.GameObjects
 {
     public class MovingWall : MonoBehaviour
     {
@@ -68,7 +68,7 @@ namespace BreakingRat.GameLogic.Obstacles.GameObjects
 
             var targetPosition = Vector3.right * _movementSpeed * Time.fixedDeltaTime;
 
-            if (_movingRight==false)
+            if (_movingRight == false)
                 targetPosition = -targetPosition;
 
             transform.position = transform.position + targetPosition;

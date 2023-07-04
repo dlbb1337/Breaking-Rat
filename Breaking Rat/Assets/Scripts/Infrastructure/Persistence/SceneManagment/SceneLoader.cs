@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace BreakingRat.Infrastructure
+namespace BreakingRat.Assets.Scripts.Infrastructure.Persistence.SceneManagment
 {
     public class SceneLoader
     {

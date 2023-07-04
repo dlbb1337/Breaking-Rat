@@ -1,8 +1,9 @@
+using BreakingRat.Assets.Scripts.Core.Domain.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace BreakingRat.GameLogic.Location.MazeLogic
+namespace BreakingRat.Assets.Scripts.Core.Application.Services
 {
     public class MazeGenerator
     {
@@ -37,7 +38,7 @@ namespace BreakingRat.GameLogic.Location.MazeLogic
                 _maze[0, y] = new TemplateCell()
                 {
                     LeftWall = true,
-                    BottomWall = _maze[0,y].BottomWall,
+                    BottomWall = _maze[0, y].BottomWall,
                     X = 0,
                     Y = y,
                 };
@@ -47,7 +48,7 @@ namespace BreakingRat.GameLogic.Location.MazeLogic
             {
                 _maze[x, 0] = new TemplateCell()
                 {
-                    LeftWall = _maze[x,0].LeftWall,
+                    LeftWall = _maze[x, 0].LeftWall,
                     BottomWall = true,
                     X = x,
                     Y = 0,
@@ -70,7 +71,7 @@ namespace BreakingRat.GameLogic.Location.MazeLogic
                 _maze.Bounds[exit.Value.X].BottomWall = false;
             }
 
-            return _maze; 
+            return _maze;
         }
 
         public TemplateMaze Generate(int width, int height, TemplateCell? entry = null)

@@ -1,6 +1,6 @@
 using BreakingRat.UI;
 
-namespace BreakingRat.Infrastructure.States
+namespace BreakingRat.Assets.Scripts.Core.Application.StateMachine.States
 {
     public class GameLoopState : IState
     {

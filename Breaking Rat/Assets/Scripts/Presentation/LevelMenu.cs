@@ -1,8 +1,7 @@
-using BreakingRat.Data;
-using BreakingRat.Data.Services;
-using BreakingRat.Infrastructure;
-using BreakingRat.Infrastructure.States;
-using BreakingRat.UI.Factory;
+using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
+using BreakingRat.Assets.Scripts.Core.Application.StateMachine;
+using BreakingRat.Assets.Scripts.Core.Application.StateMachine.States;
+using BreakingRat.Assets.Scripts.Core.Domain.Data;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;
@@ -10,7 +9,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace BreakingRat.UI
+namespace BreakingRat.Assets.Scripts.Presentation
 {
     public class LevelMenu : MonoBehaviour
     {
@@ -40,8 +39,8 @@ namespace BreakingRat.UI
 
         public async Task LoadLevelsAsync()
         {
-            if(_staticDataService.Initialized == false)
-            await _staticDataService.InitializeAsync();
+            if (_staticDataService.Initialized == false)
+                await _staticDataService.InitializeAsync();
 
             var datas = _staticDataService.LevelStaticDatas;
 

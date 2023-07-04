@@ -1,9 +1,8 @@
-using BreakingRat.GameLogic.Services;
-using BreakingRat.Infrastructure.Services.Input;
+using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
 using UnityEngine;
 using Zenject;
 
-namespace BreakingRat.GameLogic.PlayerLogic
+namespace BreakingRat.Assets.Scripts.Core.Application.GameLogic.PlayerLogic
 {
     [RequireComponent(typeof(Rigidbody2D))]
     public class PlayerMovement : MonoBehaviour

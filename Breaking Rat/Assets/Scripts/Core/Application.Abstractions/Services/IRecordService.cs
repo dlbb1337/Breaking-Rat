@@ -1,7 +1,6 @@
-
-namespace BreakingRat.GameLogic.Services
+namespace BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services
 {
-    public interface IRecordService 
+    public interface IRecordService
     {
         int Record { get; }
         void UpdateRecord();

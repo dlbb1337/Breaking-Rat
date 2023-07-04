@@ -1,13 +1,13 @@
-using BreakingRat.Data.Obstacles;
-using BreakingRat.GameLogic.Location.MazeLogic;
+using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
+using BreakingRat.Assets.Scripts.Core.Application.GameLogic.Location.MazeLogic;
+using BreakingRat.Assets.Scripts.Core.Domain.Data.Obstacles;
 using BreakingRat.UI;
-using BreakingRat.UI.Factory;
 using System.Collections;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 
-namespace BreakingRat.GameLogic.Obstacles
+namespace BreakingRat.Assets.Scripts.Core.Application.GameLogic.Obstacles
 {
     public class CameraChangerObstacles : IObstacles
     {

@@ -1,3 +1,4 @@
+using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -5,7 +6,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using Zenject;
 
-namespace BreakingRat.Infrastructure.Services.AssetManagement
+namespace BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services.AssetManagement
 {
     public class AssetProvider : IAssetProvider
     {
@@ -38,7 +39,7 @@ namespace BreakingRat.Infrastructure.Services.AssetManagement
             if (_completedCashe.TryGetValue
                       (assetReference.AssetGUID, out AsyncOperationHandle completedHandle))
                 return completedHandle.Result as T;
-            
+
             return await RunWithCacheOnComplete(
               Addressables.LoadAssetAsync<T>(assetReference),
               cacheKey: assetReference.AssetGUID);
@@ -142,7 +143,7 @@ namespace BreakingRat.Infrastructure.Services.AssetManagement
                 (prefab, position, rotation, parent);
         }
 
-        public async Task<Object> Instantiate(string address, Transform parent = null) 
+        public async Task<Object> Instantiate(string address, Transform parent = null)
         {
             if (Initialized == false)
             {

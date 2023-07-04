@@ -1,8 +1,8 @@
 using System;
 
-namespace BreakingRat.Infrastructure.States
+namespace BreakingRat.Assets.Scripts.Core.Application.StateMachine.States
 {
-    public interface IState:IExitableState
+    public interface IState : IExitableState
     {
         void Enter();
     }

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BreakingRat.GameLogic.Services
+namespace BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services
 {
-    public abstract class IScoreService 
+    public abstract class IScoreService
     {
         public virtual int Score { get; private set; } = 0;
 

@@ -1,6 +1,6 @@
-using BreakingRat.Data.Services;
+using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
 
-namespace BreakingRat.GameLogic.Services
+namespace BreakingRat.Assets.Scripts.Core.Application.Services
 {
     public class RecordService : IRecordService
     {

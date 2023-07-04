@@ -1,9 +1,9 @@
-using BreakingRat.Infrastructure.Services.Ads;
+using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace BreakingRat.UI
+namespace BreakingRat.Assets.Scripts.Core.Application.UI
 {
     public class AdButton : MonoBehaviour
     {

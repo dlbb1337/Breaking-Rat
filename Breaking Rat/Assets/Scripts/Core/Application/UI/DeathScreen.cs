@@ -1,13 +1,12 @@
-using BreakingRat.GameLogic.Services;
-using BreakingRat.Infrastructure;
-using BreakingRat.Infrastructure.Services.AssetManagement;
-using BreakingRat.Infrastructure.States;
+using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
+using BreakingRat.Assets.Scripts.Core.Application.StateMachine;
+using BreakingRat.Assets.Scripts.Core.Application.StateMachine.States;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace BreakingRat.GameLogic.DeathLogic
+namespace BreakingRat.Assets.Scripts.Core.Application.UI
 {
     public class DeathScreen : MonoBehaviour
     {

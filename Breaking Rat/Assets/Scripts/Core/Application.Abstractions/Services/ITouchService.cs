@@ -1,9 +1,9 @@
 using System;
 using UnityEngine;
 
-namespace BreakingRat.Infrastructure.Services.Input
+namespace BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services
 {
-    public interface ITouchService 
+    public interface ITouchService
     {
         public event Action<Vector2> TouchBegun;
         public event Action<Vector2> TouchContinues;

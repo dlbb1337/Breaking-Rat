@@ -1,8 +1,9 @@
-using BreakingRat.Infrastructure.Services.Input.InputSystem;
+using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
+using BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services.InputSystem;
 using System;
 using UnityEngine;
 
-namespace BreakingRat.Infrastructure.Services.Input
+namespace BreakingRat.Assets.Scripts.Core.Application.Services
 {
     public class TouchService : ITouchService
     {
@@ -15,7 +16,7 @@ namespace BreakingRat.Infrastructure.Services.Input
         public TouchService(InputService inputService)
         {
             _inputService = inputService;
-            
+
             _inputService.onEnable += () =>
             {
                 _inputService.PlayerControl.ScreenInput.Turn.started += Turn_started;

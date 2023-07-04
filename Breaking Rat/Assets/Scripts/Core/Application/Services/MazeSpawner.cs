@@ -1,13 +1,13 @@
-using BreakingRat.Data.Services;
-using BreakingRat.GameLogic.Obstacles;
-using BreakingRat.GameLogic.Services;
-using BreakingRat.Infrastructure.Factory;
+using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
+using BreakingRat.Assets.Scripts.Core.Application.GameLogic.Location.MazeLogic;
+using BreakingRat.Assets.Scripts.Core.Application.GameLogic.Obstacles;
+using BreakingRat.Assets.Scripts.Core.Domain.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace BreakingRat.GameLogic.Location.MazeLogic
+namespace BreakingRat.Assets.Scripts.Core.Application.Services
 {
     public class MazeSpawner
     {

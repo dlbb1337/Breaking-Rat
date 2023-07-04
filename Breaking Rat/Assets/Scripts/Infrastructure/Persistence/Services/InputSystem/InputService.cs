@@ -1,7 +1,8 @@
+using BreakingRat.Infrastructure.Services.Input.InputSystem;
 using System;
 using UnityEngine;
 
-namespace BreakingRat.Infrastructure.Services.Input.InputSystem
+namespace BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services.InputSystem
 {
     public class InputService : MonoBehaviour
     {

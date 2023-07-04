@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BreakingRat.GameLogic.DeathLogic.Services
+namespace BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services
 {
-    public interface IDeathService 
+    public interface IDeathService
     {
         void Death();
     }

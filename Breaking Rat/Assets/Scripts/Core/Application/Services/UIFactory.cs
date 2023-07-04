@@ -1,10 +1,11 @@
-using BreakingRat.Infrastructure.Services.AssetManagement;
+using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
+using BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services.AssetManagement;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace BreakingRat.UI.Factory
+namespace BreakingRat.Assets.Scripts.Core.Application.Services
 {
     public class UIFactory : IUIFactory
     {
@@ -35,7 +36,7 @@ namespace BreakingRat.UI.Factory
 
         public async Task<Canvas> CreateUIRootAsync()
         {
-            var gameObject =  await _assetProvider
+            var gameObject = await _assetProvider
             .Instantiate(AssetPaths.UIRootPrefabPath);
 
             return gameObject.GetComponent<Canvas>();

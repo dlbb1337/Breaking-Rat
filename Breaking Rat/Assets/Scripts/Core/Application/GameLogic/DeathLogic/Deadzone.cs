@@ -1,10 +1,10 @@
+using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
 using BreakingRat.GameLogic.DeathLogic.Services;
-using BreakingRat.GameLogic.Services;
 using UnityEngine;
 using Zenject;
-using IFactory = BreakingRat.Infrastructure.Factory.IFactory;
+using IFactory = BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services.IFactory;
 
-namespace BreakingRat.GameLogic.DeathLogic
+namespace BreakingRat.Assets.Scripts.Core.Application.GameLogic.DeathLogic
 {
     public class Deadzone : MonoBehaviour
     {
@@ -21,7 +21,7 @@ namespace BreakingRat.GameLogic.DeathLogic
 
         [Inject]
         private void Construct
-            (IScoreService scoreService,IPauseService pauseService)
+            (IScoreService scoreService, IPauseService pauseService)
         {
             _scoreService = scoreService;
 

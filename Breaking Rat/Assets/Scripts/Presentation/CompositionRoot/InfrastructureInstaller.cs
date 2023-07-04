@@ -1,12 +1,13 @@
-using BreakingRat.Data.Services;
-using BreakingRat.Infrastructure;
-using BreakingRat.Infrastructure.States;
-using BreakingRat.UI;
 using Zenject;
 using UnityEngine;
-using BreakingRat.Infrastructure.Services.Ads;
+using BreakingRat.Assets.Scripts.Core.Application.StateMachine.States;
+using BreakingRat.Assets.Scripts.Core.Application.StateMachine;
+using BreakingRat.Assets.Scripts.Core.Application.UI;
+using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
+using BreakingRat.Assets.Scripts.Infrastructure.Persistence.SceneManagment;
+using BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services;
 
-namespace BreakingRat.CompositionRoot
+namespace BreakingRat.Assets.Scripts.Presentation.CompositionRoot
 {
     public class InfrastructureInstaller : MonoInstaller
     {

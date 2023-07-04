@@ -1,20 +1,18 @@
-using BreakingRat.Data;
-using BreakingRat.Data.Obstacles;
-using BreakingRat.Data.Services;
-using BreakingRat.GameLogic.DeathLogic;
-using BreakingRat.GameLogic.DeathLogic.Services;
-using BreakingRat.GameLogic.Location.MazeLogic;
-using BreakingRat.GameLogic.PlayerLogic;
-using BreakingRat.GameLogic.Services;
-using BreakingRat.Infrastructure;
-using BreakingRat.Infrastructure.Services.Ads;
-using BreakingRat.Infrastructure.States;
+using BreakingRat.Assets.Scripts.Core.Application.GameLogic;
+using BreakingRat.Assets.Scripts.Core.Application.GameLogic.DeathLogic;
+using BreakingRat.Assets.Scripts.Core.Application.GameLogic.PlayerLogic;
+using BreakingRat.Assets.Scripts.Core.Application.StateMachine;
+using BreakingRat.Assets.Scripts.Core.Application.StateMachine.States;
+using BreakingRat.Assets.Scripts.Core.Application.Services;
 using BreakingRat.UI;
 using System.Threading.Tasks;
 using UnityEngine;
-using IFactory = BreakingRat.Infrastructure.Factory.IFactory;
+using IFactory = BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services.IFactory;
+using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
+using BreakingRat.Assets.Scripts.Core.Domain.Data.Obstacles;
+using BreakingRat.Assets.Scripts.Core.Domain.Data;
 
-namespace BreakingRat.GameLogic
+namespace BreakingRat.Assets.Scripts.Presentation
 {
     public class InitializeLevel
     {
@@ -134,7 +132,7 @@ namespace BreakingRat.GameLogic
 
         private void InstantiateLastMaze(MazesStaticData data)
         {
-            var upperMaze = _mazeSpawner.Mazes[_mazeSpawner.Mazes.Count -3];
+            var upperMaze = _mazeSpawner.Mazes[_mazeSpawner.Mazes.Count - 3];
 
             upperMaze.ExitTrigger.Enter.AddListener(async collider => await InstantiatingMazesAsync(data));
         }

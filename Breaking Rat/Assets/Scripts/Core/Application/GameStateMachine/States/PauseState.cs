@@ -1,6 +1,6 @@
-using BreakingRat.UI;
+using BreakingRat.Assets.Scripts.Core.Application.UI;
 
-namespace BreakingRat.Infrastructure.States
+namespace BreakingRat.Assets.Scripts.Core.Application.StateMachine.States
 {
     public class PauseState : IState
     {

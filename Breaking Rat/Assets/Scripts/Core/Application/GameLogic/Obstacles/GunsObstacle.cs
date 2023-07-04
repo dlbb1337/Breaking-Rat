@@ -1,12 +1,11 @@
-using BreakingRat.Data.Obstacles;
-using BreakingRat.GameLogic.DeathLogic.Services;
-using BreakingRat.GameLogic.Location.MazeLogic;
-using BreakingRat.GameLogic.Obstacles.GameObjects;
-using BreakingRat.Infrastructure.Factory;
+using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
+using BreakingRat.Assets.Scripts.Core.Application.GameLogic.Location.MazeLogic;
+using BreakingRat.Assets.Scripts.Core.Application.GameLogic.Obstacles.GameObjects;
+using BreakingRat.Assets.Scripts.Core.Domain.Data.Obstacles;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace BreakingRat.GameLogic.Obstacles
+namespace BreakingRat.Assets.Scripts.Core.Application.GameLogic.Obstacles
 {
     public class GunsObstacle : IObstacles
     {

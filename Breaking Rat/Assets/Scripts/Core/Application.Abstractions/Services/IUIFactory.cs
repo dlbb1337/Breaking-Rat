@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace BreakingRat.UI.Factory
+namespace BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services
 {
     public interface IUIFactory
     {

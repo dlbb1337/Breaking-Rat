@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 
-namespace BreakingRat.Infrastructure.Services.AssetManagement
+namespace BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services
 {
     public interface IAssetProvider
     {

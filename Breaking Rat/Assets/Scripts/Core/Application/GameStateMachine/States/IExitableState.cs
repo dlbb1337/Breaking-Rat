@@ -1,4 +1,4 @@
-namespace BreakingRat.Infrastructure.States
+namespace BreakingRat.Assets.Scripts.Core.Application.StateMachine.States
 {
     public interface IExitableState
     {

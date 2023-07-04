@@ -1,6 +1,7 @@
-using BreakingRat.UI;
+using BreakingRat.Assets.Scripts.Core.Application.UI;
+using BreakingRat.Assets.Scripts.Infrastructure.Persistence.SceneManagment;
 
-namespace BreakingRat.Infrastructure.States
+namespace BreakingRat.Assets.Scripts.Core.Application.StateMachine.States
 {
     public class LoadSceneState : IValueState<string>
     {
