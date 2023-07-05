@@ -1,7 +1,7 @@
 using TMPro;
 using UnityEngine;
 
-namespace BreakingRat.Assets.Scripts.Core.Application.UI
+namespace BreakingRat.Application.UI
 {
     public class GameCurtain : MonoBehaviour
     {

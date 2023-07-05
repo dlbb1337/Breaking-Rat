@@ -1,14 +1,14 @@
-using BreakingRat.Assets.Scripts.Core.Application.UI;
-using BreakingRat.Assets.Scripts.Infrastructure.Persistence.SceneManagment;
+using BreakingRat.Application.Abstractions.IServices;
+using BreakingRat.Application.UI;
 
-namespace BreakingRat.Assets.Scripts.Core.Application.StateMachine.States
+namespace BreakingRat.Application.StateMachine.States
 {
     public class LoadSceneState : IValueState<string>
     {
         private readonly GameCurtain _gameCurtain;
-        private readonly SceneLoader _sceneLoader;
+        private readonly ISceneLoaderService _sceneLoader;
 
-        public LoadSceneState(SceneLoader sceneLoader, GameCurtain gameCurtain)
+        public LoadSceneState(ISceneLoaderService sceneLoader, GameCurtain gameCurtain)
         {
             _gameCurtain = gameCurtain;
             _sceneLoader = sceneLoader;

@@ -1,8 +1,8 @@
-using BreakingRat.Assets.Scripts.Core.Domain.Data;
+using BreakingRat.Domain.Data;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services
+namespace BreakingRat.Application.Abstractions.IServices
 {
     public interface IStaticDataService
     {

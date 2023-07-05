@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace BreakingRat.Assets.Scripts.Core.Application.GameLogic
+namespace BreakingRat.Application.GameLogic
 {
     public class Follow : MonoBehaviour
     {

@@ -1,8 +1,8 @@
-using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
+using BreakingRat.Application.Abstractions.IServices;
 using UnityEngine;
 using Zenject;
 
-namespace BreakingRat.Assets.Scripts.Core.Application.GameLogic.Obstacles.GameObjects
+namespace BreakingRat.Application.GameLogic.Obstacles.GameObjects
 {
     public class MovingWall : MonoBehaviour
     {

@@ -1,4 +1,4 @@
-namespace BreakingRat.Infrastructure.Persistence.Services.AssetManagement
+namespace BreakingRat.Application.Abstractions.IServices
 {
     public static class AssetPaths
     {

@@ -1,11 +1,11 @@
-using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
-using BreakingRat.Assets.Scripts.Core.Application.Services;
-using BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services.AssetManagement;
+using BreakingRat.Application.Abstractions.IServices;
+using BreakingRat.Application.Services.Factories;
+using BreakingRat.Infrastructure.Persistence.Services.AssetManagement;
 using Zenject;
-using Factory = BreakingRat.Assets.Scripts.Core.Application.Services.Factory;
-using IFactory = BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services.IFactory;
+using Factory = BreakingRat.Application.Services.Factories.Factory;
+using IFactory = BreakingRat.Application.Services.Factories.IFactory;
 
-namespace BreakingRat.Assets.Scripts.Presentation.CompositionRoot
+namespace BreakingRat.Presentation.CompositionRoot
 {
     public class MenuInstaller : MonoInstaller
     {

@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace BreakingRat.Assets.Scripts.Core.Domain.Data.Obstacles
+namespace BreakingRat.Domain.Data.Obstacles
 {
     [CreateAssetMenu(fileName = "DeadzoneStaticData", menuName = "StaticData/DeadzoneStaticData")]
     public class DeadzoneStaticData : ScriptableObject

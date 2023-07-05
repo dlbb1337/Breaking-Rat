@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services
+namespace BreakingRat.Application.Abstractions.IServices
 {
     public interface ITouchService
     {

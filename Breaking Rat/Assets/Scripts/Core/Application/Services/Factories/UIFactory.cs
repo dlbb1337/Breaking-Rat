@@ -1,11 +1,10 @@
-using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
-using BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services.AssetManagement;
+using BreakingRat.Application.Abstractions.IServices;
 using System.Threading.Tasks;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace BreakingRat.Assets.Scripts.Core.Application.Services
+namespace BreakingRat.Application.Services.Factories
 {
     public class UIFactory : IUIFactory
     {
@@ -30,7 +29,6 @@ namespace BreakingRat.Assets.Scripts.Core.Application.Services
 
             var gameObject = await _assetProvider.Instantiate
                 (AssetPaths.CurtainPrefabPath, UIRoot.transform);
-
             return gameObject.GetComponent<CanvasGroup>();
         }
 

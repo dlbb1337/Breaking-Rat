@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace BreakingRat.Assets.Scripts.Core.Application.GameLogic.Location.MazeLogic
+namespace BreakingRat.Application.GameLogic.Location.MazeLogic
 {
     public class Cell : MonoBehaviour
     {

@@ -1,4 +1,4 @@
-namespace BreakingRat.Assets.Scripts.Core.Domain.Entities
+namespace BreakingRat.Domain.Entities
 {
     public struct TemplateCell
     {

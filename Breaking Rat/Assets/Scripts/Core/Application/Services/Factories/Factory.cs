@@ -1,16 +1,15 @@
-using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
-using BreakingRat.Assets.Scripts.Core.Application.GameLogic.DeathLogic;
-using BreakingRat.Assets.Scripts.Core.Application.GameLogic.Location.MazeLogic;
-using BreakingRat.Assets.Scripts.Core.Application.GameLogic.Obstacles.GameObjects;
-using BreakingRat.Assets.Scripts.Core.Application.GameLogic.PlayerLogic;
-using BreakingRat.Assets.Scripts.Core.Application.UI;
-using BreakingRat.Assets.Scripts.Core.Domain.Entities;
-using BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services.AssetManagement;
+using BreakingRat.Application.Abstractions.IServices;
+using BreakingRat.Application.GameLogic.DeathLogic;
+using BreakingRat.Application.GameLogic.Location.MazeLogic;
+using BreakingRat.Application.GameLogic.Obstacles.GameObjects;
+using BreakingRat.Application.GameLogic.PlayerLogic;
+using BreakingRat.Application.UI;
+using BreakingRat.Domain.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace BreakingRat.Assets.Scripts.Core.Application.Services
+namespace BreakingRat.Application.Services.Factories
 {
     public class Factory : IFactory
     {
@@ -119,7 +118,7 @@ namespace BreakingRat.Assets.Scripts.Core.Application.Services
              Transform parent = null)
         {
             return await _assetProvider.InstantiateWithDI<PlayerMovement>
-                            (AssetPaths.PlayerPrefabPath, position, rotation);
+                            (AssetPaths.PlayerPrefabPath , position, rotation);
         }
 
         public void Remove(GameObject obj) =>
@@ -127,7 +126,8 @@ namespace BreakingRat.Assets.Scripts.Core.Application.Services
 
         public async Task<HUD> CreateHUD()
         {
-            return await _assetProvider.InstantiateWithDI<HUD>(AssetPaths.HUDPrefabPath);
+            return await _assetProvider.InstantiateWithDI<HUD>
+                (AssetPaths.HUDPrefabPath);
         }
 
         public async Task<DeathScreen> CreateDeathScreenAsync()

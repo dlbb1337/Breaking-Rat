@@ -1,10 +1,9 @@
-using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
-using System;
+using BreakingRat.Application.Abstractions.IServices;
 using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
-namespace BreakingRat.Assets.Scripts.Core.Application.GameLogic.Obstacles.GameObjects
+namespace BreakingRat.Application.GameLogic.Obstacles.GameObjects
 {
     public class Gun : MonoBehaviour
     {

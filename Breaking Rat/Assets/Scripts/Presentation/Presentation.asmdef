@@ -1,0 +1,22 @@
+{
+    "name": "Presentation",
+    "rootNamespace": "BreakingRat.Presentation",
+    "references": [
+        "GUID:b62a1277b5dbe8343952171f44e95f05",
+        "GUID:ed82b0ac3d28b7e4eb4bbb1be6c19bc2",
+        "GUID:566cf23ca9517eb4aa9fd08a642cda00",
+        "GUID:52577b9e8cf0ffd4e96b8e757fd46621",
+        "GUID:0d8beb7f090555447a6cf5ce9e54dbb4",
+        "GUID:ff6de30450f3748908ff580f6ec64d9a",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

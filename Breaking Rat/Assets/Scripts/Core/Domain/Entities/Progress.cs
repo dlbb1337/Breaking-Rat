@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace BreakingRat.Assets.Scripts.Core.Domain.Entities
+namespace BreakingRat.Domain.Entities
 {
     [Serializable]
     public class Progress : ISerializationCallbackReceiver

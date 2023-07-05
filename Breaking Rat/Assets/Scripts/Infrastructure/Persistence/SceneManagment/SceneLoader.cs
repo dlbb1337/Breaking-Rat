@@ -1,12 +1,13 @@
+using BreakingRat.Application.Abstractions.IServices;
 using System;
 using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace BreakingRat.Assets.Scripts.Infrastructure.Persistence.SceneManagment
+namespace BreakingRat.Infrastructure.Persistence.SceneManagment
 {
-    public class SceneLoader
+    public class SceneLoader : ISceneLoaderService
     {
         private readonly CoroutineRunner _coroutineRunner;
 

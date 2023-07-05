@@ -1,7 +1,8 @@
-using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
-using BreakingRat.Assets.Scripts.Core.Application.StateMachine;
-using BreakingRat.Assets.Scripts.Core.Application.StateMachine.States;
-using BreakingRat.Assets.Scripts.Core.Domain.Data;
+using BreakingRat.Application.Abstractions.IServices;
+using BreakingRat.Application.Services.Factories;
+using BreakingRat.Application.StateMachine;
+using BreakingRat.Application.StateMachine.States;
+using BreakingRat.Domain.Data;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TMPro;

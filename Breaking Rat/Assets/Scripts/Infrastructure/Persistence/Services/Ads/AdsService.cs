@@ -1,10 +1,9 @@
-using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
-using System.Linq;
+using BreakingRat.Application.Abstractions.IServices;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.EventSystems;
 
-namespace BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services.Ads
+namespace BreakingRat.Infrastructure.Persistence.Services.Ads
 {
     public class AdsService :
         IAdsService,
@@ -32,7 +31,7 @@ namespace BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services.Ads
         {
             _initialized = true;
 
-            switch (Application.platform)
+            switch (UnityEngine.Application.platform)
             {
                 case RuntimePlatform.Android:
                     _gameID = AndroidId;
