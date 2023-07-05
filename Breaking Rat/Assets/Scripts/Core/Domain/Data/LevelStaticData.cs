@@ -1,8 +1,8 @@
-using BreakingRat.Assets.Scripts.Core.Domain.Data.Obstacles;
+using BreakingRat.Domain.Data.Obstacles;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace BreakingRat.Assets.Scripts.Core.Domain.Data
+namespace BreakingRat.Domain.Data
 {
     [CreateAssetMenu(fileName = "LevelStaticData", menuName = "StaticData/LevelStaticData")]
     public class LevelStaticData : ScriptableObject

@@ -1,13 +1,14 @@
-using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
-using BreakingRat.Assets.Scripts.Core.Application.GameLogic.Location.MazeLogic;
-using BreakingRat.Assets.Scripts.Core.Application.GameLogic.Obstacles;
-using BreakingRat.Assets.Scripts.Core.Domain.Entities;
+using BreakingRat.Application.Abstractions.IServices;
+using BreakingRat.Application.GameLogic.Location.MazeLogic;
+using BreakingRat.Application.GameLogic.Obstacles;
+using BreakingRat.Application.Services.Factories;
+using BreakingRat.Domain.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace BreakingRat.Assets.Scripts.Core.Application.Services
+namespace BreakingRat.Application.Services
 {
     public class MazeSpawner
     {
@@ -37,7 +38,11 @@ namespace BreakingRat.Assets.Scripts.Core.Application.Services
             _scoreService = scoreService;
         }
 
-        public async Task<Maze> SpawnMazeAsync(int width, int height, Vector3 mazePosition, TemplateCell? entry = null)
+        public async Task<Maze> SpawnMazeAsync
+            (int width,
+             int height,
+             Vector3 mazePosition,
+             TemplateCell? entry = null)
         {
             var maze = await _factory.InstantiateMaze
                 (width,

@@ -1,9 +1,9 @@
-using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
-using BreakingRat.Assets.Scripts.Core.Application.StateMachine;
-using BreakingRat.Assets.Scripts.Core.Application.StateMachine.States;
+using BreakingRat.Application.Abstractions.IServices;
+using BreakingRat.Application.StateMachine;
+using BreakingRat.Application.StateMachine.States;
 using System;
 
-namespace BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services
+namespace BreakingRat.Infrastructure.Persistence.Services
 {
     public class PauseService : IPauseService
     {

@@ -1,6 +1,6 @@
-using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
+using BreakingRat.Application.Abstractions.IServices;
 
-namespace BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services
+namespace BreakingRat.Infrastructure.Persistence.Services
 {
     public class ScoreService : IScoreService
     {

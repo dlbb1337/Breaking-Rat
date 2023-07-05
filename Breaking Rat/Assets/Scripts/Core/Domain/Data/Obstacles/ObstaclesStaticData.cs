@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace BreakingRat.Assets.Scripts.Core.Domain.Data.Obstacles
+namespace BreakingRat.Domain.Data.Obstacles
 {
     public abstract class ObstaclesStaticData : ScriptableObject
     {

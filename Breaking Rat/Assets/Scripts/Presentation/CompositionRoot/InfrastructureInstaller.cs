@@ -1,13 +1,13 @@
-using Zenject;
+using BreakingRat.Application.Abstractions.IServices;
+using BreakingRat.Application.StateMachine;
+using BreakingRat.Application.StateMachine.States;
+using BreakingRat.Application.UI;
+using BreakingRat.Infrastructure.Persistence.SceneManagment;
+using BreakingRat.Infrastructure.Persistence.Services;
 using UnityEngine;
-using BreakingRat.Assets.Scripts.Core.Application.StateMachine.States;
-using BreakingRat.Assets.Scripts.Core.Application.StateMachine;
-using BreakingRat.Assets.Scripts.Core.Application.UI;
-using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
-using BreakingRat.Assets.Scripts.Infrastructure.Persistence.SceneManagment;
-using BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services;
+using Zenject;
 
-namespace BreakingRat.Assets.Scripts.Presentation.CompositionRoot
+namespace BreakingRat.Presentation.CompositionRoot
 {
     public class InfrastructureInstaller : MonoInstaller
     {
@@ -18,7 +18,7 @@ namespace BreakingRat.Assets.Scripts.Presentation.CompositionRoot
             Container.Bind<GameCurtain>().FromInstance(_gameCurtain).AsSingle();
             Container.Bind<IProgressService>().To<ProgressService>().AsSingle();
             Container.Bind<IStaticDataService>().To<StaticDataService>().AsSingle();
-            Container.Bind<SceneLoader>().To<SceneLoader>().AsSingle();
+            Container.Bind<ISceneLoaderService>().To<SceneLoader>().AsSingle();
             Container.BindInterfacesTo<GameLoopState>().AsSingle();
             Container.BindInterfacesTo<LoadSceneState>().AsSingle();
             Container.BindInterfacesTo<InitializeState>().AsSingle();

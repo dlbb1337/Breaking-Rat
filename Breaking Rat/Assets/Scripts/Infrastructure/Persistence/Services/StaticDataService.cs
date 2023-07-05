@@ -1,13 +1,11 @@
-using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
-using BreakingRat.Assets.Scripts.Core.Domain.Data;
+using BreakingRat.Application.Abstractions.IServices;
+using BreakingRat.Domain.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using UnityEngine;
 using UnityEngine.AddressableAssets;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
-namespace BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services
+namespace BreakingRat.Infrastructure.Persistence.Services
 {
     public class StaticDataService : IStaticDataService
     {

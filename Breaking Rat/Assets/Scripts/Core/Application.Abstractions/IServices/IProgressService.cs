@@ -1,6 +1,6 @@
-using BreakingRat.Assets.Scripts.Core.Domain.Entities;
+using BreakingRat.Domain.Entities;
 
-namespace BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services
+namespace BreakingRat.Application.Abstractions.IServices
 {
     public interface IProgressService
     {

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace BreakingRat.Assets.Scripts.Core.Application.GameLogic
+namespace BreakingRat.Application.GameLogic
 {
     [RequireComponent(typeof(Collider2D))]
     public class Trigger : MonoBehaviour

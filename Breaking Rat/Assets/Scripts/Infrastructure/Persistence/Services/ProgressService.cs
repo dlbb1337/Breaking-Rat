@@ -1,10 +1,9 @@
-using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
-using BreakingRat.Assets.Scripts.Core.Domain.Entities;
-using System;
+using BreakingRat.Application.Abstractions.IServices;
+using BreakingRat.Domain.Entities;
 using System.IO;
 using UnityEngine;
 
-namespace BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services
+namespace BreakingRat.Infrastructure.Persistence.Services
 {
     public class ProgressService : IProgressService
     {
@@ -15,7 +14,7 @@ namespace BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services
 
         public ProgressService(IStaticDataService staticDataService)
         {
-            _filePath = Application.persistentDataPath + "/Save.json";
+            _filePath = UnityEngine.Application.persistentDataPath + "/Save.json";
             _staticDataService = staticDataService;
 
             Initialize();

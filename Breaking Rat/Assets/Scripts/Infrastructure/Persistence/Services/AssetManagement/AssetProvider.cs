@@ -1,4 +1,4 @@
-using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
+using BreakingRat.Application.Abstractions.IServices;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -6,7 +6,7 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using Zenject;
 
-namespace BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services.AssetManagement
+namespace BreakingRat.Infrastructure.Persistence.Services.AssetManagement
 {
     public class AssetProvider : IAssetProvider
     {

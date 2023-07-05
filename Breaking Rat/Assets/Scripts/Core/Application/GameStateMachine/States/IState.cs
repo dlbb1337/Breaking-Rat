@@ -1,6 +1,6 @@
 using System;
 
-namespace BreakingRat.Assets.Scripts.Core.Application.StateMachine.States
+namespace BreakingRat.Application.StateMachine.States
 {
     public interface IState : IExitableState
     {

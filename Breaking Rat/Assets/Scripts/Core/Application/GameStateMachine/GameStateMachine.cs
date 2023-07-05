@@ -1,8 +1,8 @@
-using BreakingRat.Assets.Scripts.Core.Application.StateMachine.States;
+using BreakingRat.Application.StateMachine.States;
 using System;
 using System.Collections.Generic;
 
-namespace BreakingRat.Assets.Scripts.Core.Application.StateMachine
+namespace BreakingRat.Application.StateMachine
 {
     public class GameStateMachine
     {

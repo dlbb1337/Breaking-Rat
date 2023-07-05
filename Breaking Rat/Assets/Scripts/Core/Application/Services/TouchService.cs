@@ -1,9 +1,9 @@
-using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
-using BreakingRat.Assets.Scripts.Infrastructure.Persistence.Services.InputSystem;
+using BreakingRat.Application.Abstractions.IServices;
+using BreakingRat.Application.Abstractions.Services.InputSystem;
 using System;
 using UnityEngine;
 
-namespace BreakingRat.Assets.Scripts.Core.Application.Services
+namespace BreakingRat.Application.Services
 {
     public class TouchService : ITouchService
     {

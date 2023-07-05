@@ -1,6 +1,6 @@
 using System;
 
-namespace BreakingRat.Assets.Scripts.Core.Domain.Entities
+namespace BreakingRat.Domain.Entities
 {
     public class TemplateMaze
     {

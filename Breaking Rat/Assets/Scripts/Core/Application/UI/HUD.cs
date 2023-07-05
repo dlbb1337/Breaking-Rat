@@ -1,10 +1,10 @@
-using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
+using BreakingRat.Application.Abstractions.IServices;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
-namespace BreakingRat.Assets.Scripts.Core.Application.UI
+namespace BreakingRat.Application.UI
 {
     public class HUD : MonoBehaviour
     {

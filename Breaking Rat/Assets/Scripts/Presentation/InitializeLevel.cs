@@ -1,17 +1,17 @@
-using BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services;
-using BreakingRat.Assets.Scripts.Core.Application.GameLogic;
-using BreakingRat.Assets.Scripts.Core.Application.GameLogic.DeathLogic;
-using BreakingRat.Assets.Scripts.Core.Application.GameLogic.PlayerLogic;
-using BreakingRat.Assets.Scripts.Core.Application.Services;
-using BreakingRat.Assets.Scripts.Core.Application.StateMachine;
-using BreakingRat.Assets.Scripts.Core.Application.StateMachine.States;
-using BreakingRat.Assets.Scripts.Core.Domain.Data;
-using BreakingRat.Assets.Scripts.Core.Domain.Data.Obstacles;
+using BreakingRat.Application.Abstractions.IServices;
+using BreakingRat.Application.GameLogic;
+using BreakingRat.Application.GameLogic.DeathLogic;
+using BreakingRat.Application.GameLogic.PlayerLogic;
+using BreakingRat.Application.Services;
+using BreakingRat.Application.StateMachine;
+using BreakingRat.Application.StateMachine.States;
+using BreakingRat.Domain.Data;
+using BreakingRat.Domain.Data.Obstacles;
 using System.Threading.Tasks;
 using UnityEngine;
-using IFactory = BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services.IFactory;
+using IFactory = BreakingRat.Application.Services.Factories.IFactory;
 
-namespace BreakingRat.Assets.Scripts.Presentation
+namespace BreakingRat.Presentation
 {
     public class InitializeLevel
     {
@@ -108,14 +108,18 @@ namespace BreakingRat.Assets.Scripts.Presentation
         {
             _mazeSpawner.LevelId = _staticDataService.LevelId;
             _mazeSpawner.Capacity = 20;
-            await _mazeSpawner.SpawnMazeAsync(data.Width, data.Height, data.InstantiateFirstMazePosition);
+            await _mazeSpawner.SpawnMazeAsync
+                (data.Width,
+                 data.Height,
+                 data.InstantiateFirstMazePosition);
 
             await SpawnMazesAsync(data);
         }
 
         private async Task<Deadzone> DeadzoneAsync(DeadzoneStaticData data)
         {
-            var deadzone = await _factory.CreateDeadzone(data.InstantiateDeadzonePosition, Quaternion.identity);
+            var deadzone = await _factory.CreateDeadzone
+                (data.InstantiateDeadzonePosition,rotation: Quaternion.identity);
 
             deadzone.MovementSpeed = data.MovementSpeed;
             deadzone.SpeedMultiplier = data.SpeedMultiplier;
@@ -133,7 +137,8 @@ namespace BreakingRat.Assets.Scripts.Presentation
         {
             var upperMaze = _mazeSpawner.Mazes[_mazeSpawner.Mazes.Count - 3];
 
-            upperMaze.ExitTrigger.Enter.AddListener(async collider => await InstantiatingMazesAsync(data));
+            upperMaze.ExitTrigger.Enter.AddListener
+                (async collider => await InstantiatingMazesAsync(data));
         }
 
         private async Task InstantiatingMazesAsync(MazesStaticData data)
@@ -142,7 +147,10 @@ namespace BreakingRat.Assets.Scripts.Presentation
             {
                 var lastMaze = _mazeSpawner.Mazes[_mazeSpawner.Mazes.Count - 1];
                 await _mazeSpawner.SpawnMazeAsync
-                    (data.Width, data.Height, lastMaze.transform.position + Vector3.up * data.Height, lastMaze.TemplateMaze.exit);
+                    (width: data.Width,
+                     height: data.Height,
+                     mazePosition: lastMaze.transform.position + Vector3.up * data.Height,
+                     entry: lastMaze.TemplateMaze.exit);
             }
             InstantiateLastMaze(data);
         }

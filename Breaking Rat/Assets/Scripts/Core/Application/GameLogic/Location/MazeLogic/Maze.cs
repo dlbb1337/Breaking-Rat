@@ -1,8 +1,8 @@
+using BreakingRat.Domain.Entities;
 using System;
 using UnityEngine;
-using BreakingRat.Assets.Scripts.Core.Domain.Entities;
 
-namespace BreakingRat.Assets.Scripts.Core.Application.GameLogic.Location.MazeLogic
+namespace BreakingRat.Application.GameLogic.Location.MazeLogic
 {
     public class Maze : MonoBehaviour
     {

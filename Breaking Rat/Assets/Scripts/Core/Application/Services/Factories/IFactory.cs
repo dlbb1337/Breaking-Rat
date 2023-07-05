@@ -1,13 +1,13 @@
-using BreakingRat.Assets.Scripts.Core.Application.GameLogic.DeathLogic;
-using BreakingRat.Assets.Scripts.Core.Application.GameLogic.Location.MazeLogic;
-using BreakingRat.Assets.Scripts.Core.Application.GameLogic.Obstacles.GameObjects;
-using BreakingRat.Assets.Scripts.Core.Application.GameLogic.PlayerLogic;
-using BreakingRat.Assets.Scripts.Core.Application.UI;
-using BreakingRat.Assets.Scripts.Core.Domain.Entities;
+using BreakingRat.Application.GameLogic.DeathLogic;
+using BreakingRat.Application.GameLogic.Location.MazeLogic;
+using BreakingRat.Application.GameLogic.Obstacles.GameObjects;
+using BreakingRat.Application.GameLogic.PlayerLogic;
+using BreakingRat.Application.UI;
+using BreakingRat.Domain.Entities;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace BreakingRat.Assets.Scripts.Core.Application.Abstractions.Services
+namespace BreakingRat.Application.Services.Factories
 {
     public interface IFactory
     {

@@ -1,9 +1,9 @@
-using BreakingRat.Assets.Scripts.Core.Domain.Entities;
+using BreakingRat.Domain.Entities;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace BreakingRat.Assets.Scripts.Core.Application.Services
+namespace BreakingRat.Application.Services
 {
     public class MazeGenerator
     {
